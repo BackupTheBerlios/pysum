@@ -1,0 +1,32 @@
+Este documento tiene las instrucciones básicas en español e inglés
+This document has the basic instructions in Spanish and English
+
+----------------
+Instrucciones:
+----------------
+Esta es una versión en desarrollo de pysum, algunas cosas no estan terminadas.
+
+pysum depende de Python sus librerias asociadas:
+Python (>= 2.4) : http://www.python.org
+PyGTK (>= 2.8) : http://www.pygtk.org
+
+Puedes encontrar el codigo fuente de pysum en /src
+
+Para ejecutarlo en un terminal escribe:
+$ python pysum.py
+
+
+-----------------
+English ReadMe:
+-----------------
+
+This is a development version of pysum, some things are not finished
+
+pysum depends on the Python runtime and associated libraries.
+Python (>= 2.4) : http://www.python.org
+PyGTK (>= 2.8) : http://www.pygtk.org
+
+You can find the source code of pysum in /src
+
+To run, on a terminal use the following syntax:
+$ python pysum.py
