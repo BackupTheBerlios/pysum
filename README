@@ -1,32 +1,23 @@
-Este documento tiene las instrucciones básicas en español e inglés
-This document has the basic instructions in Spanish and English
-
-----------------
-Instrucciones:
-----------------
-Esta es una versión en desarrollo de pysum, algunas cosas no estan terminadas.
-
-pysum depende de Python sus librerias asociadas:
-Python (>= 2.4) : http://www.python.org
-PyGTK (>= 2.8) : http://www.pygtk.org
-
-Puedes encontrar el codigo fuente de pysum en /src
-
-Para ejecutarlo en un terminal escribe:
-$ python pysum.py
-
-
------------------
-English ReadMe:
------------------
+pysum - A pygtk application for create and verify md5 and other checksum
+-------------------------------------------------------------------------
 
 This is a development version of pysum, some things are not finished
 
 pysum depends on the Python runtime and associated libraries.
+
 Python (>= 2.4) : http://www.python.org
 PyGTK (>= 2.8) : http://www.pygtk.org
 
+== To run pysum ==
+
 You can find the source code of pysum in /src
 
-To run, on a terminal use the following syntax:
+To run, in a terminal use the following syntax:
+$ cd src
 $ python pysum.py
+
+== Translations (i18n) ==
+
+You can find the *.pot file and a spanish translation (.po and .mo files) in the /po directory.
+
+You can translate the *.pot file and generate a *.mo file. You should copy the *.mo files into your locate directory. For example, if you use a translation into Spanish, copy the es.mo file to /usr/share/locale/es/LC_MESSAGES/pysum.mo

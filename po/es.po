@@ -1,0 +1,66 @@
+# Spanish translations for pysum package.
+# Copyright (C) 2008 THE pysum'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the pysum package.
+# Daniel Fuentes B. <dbfuentes@gmail.com>, 2008.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: pysum\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2008-08-22 18:14-0300\n"
+"Last-Translator: Daniel Fuentes B. <dbfuentes@gmail.com>\n"
+"Language-Team: Spanish\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Spanish\n"
+
+#: pysum.py:49
+msgid "Can't open the file:"
+msgstr "No se puede abrir el archivo:"
+
+#: pysum.py:74
+msgid "Select a file"
+msgstr "Seleccione un archivo"
+
+#: pysum.py:88
+msgid "Error"
+msgstr "Error"
+
+#: pysum.py:115
+msgid "Please choose a file"
+msgstr "Por favor seleccione un archivo"
+
+#: pysum.py:117
+msgid "Can't open the file: "
+msgstr "No se puede abrir el archivo: "
+
+#: pysum.glade.h:1
+msgid "File: "
+msgstr "Archivo: "
+
+#: pysum.glade.h:2
+msgid "Get hash"
+msgstr "Obtener hash"
+
+#: pysum.glade.h:3
+msgid "MD5 Sum: "
+msgstr "Suma MD5: "
+
+#: pysum.glade.h:4
+msgid "_About"
+msgstr "_Acerca de"
+
+#: pysum.glade.h:5
+msgid "_File"
+msgstr "_Archivo"
+
+#: pysum.glade.h:6
+msgid "_Help"
+msgstr "_Ayuda"
+
+#: pysum.glade.h:7
+msgid "pySum"
+msgstr "pySum"
+

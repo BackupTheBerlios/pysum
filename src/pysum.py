@@ -1,7 +1,7 @@
 #! /usr/bin/env python
 # -*- coding: UTF-8 -*-
 
-# pySum - A pygtk app to create and check md5 and other checksum 
+# pysum - A pygtk app to create and check md5 and other checksum 
 # Copyright (C) 2008 Daniel Fuentes B. <dbfuentes@gmail.com>
 #
 # This program is free software; you can redistribute it and/or modify
@@ -21,6 +21,8 @@
 
 # Importamos los modulos necesarios
 import md5
+import gettext
+import locale
 
 import pygtk
 pygtk.require('2.0')
@@ -28,13 +30,20 @@ import gtk
 import gtk.glade
 from SimpleGladeApp import SimpleGladeApp
 
+# Algunas cosas para gettext (i18n - traducciones)
+
+_ = gettext.gettext
+
+gettext.textdomain("pysum")
+gtk.glade.textdomain("pysum")
+
 # Definimos una funcion para obtener el hash de los archivos
 def getmd5(filename):
-    "Calculate MD5 hash for a f the specified without full load in memory"
+    "Calculate MD5 hash for a file without full-load in memory"
     try:
         fichero = open(filename, "rb")
     except:
-        print "No se puede abrir el archivo:", filename
+        print _("Can't open the file:"), filename
 
     suma = md5.new()
 
@@ -59,7 +68,7 @@ class Gui(SimpleGladeApp):
                         , gtk.RESPONSE_CANCEL
                         , gtk.STOCK_OPEN
                         , gtk.RESPONSE_OK)
-        file_open = gtk.FileChooserDialog(title="Seleccione un archivo"
+        file_open = gtk.FileChooserDialog(title=_("Select a file")
                     , action=gtk.FILE_CHOOSER_ACTION_OPEN
                     , buttons=dialog_buttons)
 
@@ -73,7 +82,7 @@ class Gui(SimpleGladeApp):
     # Ventana de error
     def error(self, message):
         dialog_error = gtk.MessageDialog(parent=None, flags=0, buttons=gtk.BUTTONS_OK)
-        dialog_error.set_title("Error")
+        dialog_error.set_title(_("Error"))
         label = gtk.Label(message)
         dialog_error.vbox.pack_start(label, True, True, 0)
         label.show()
@@ -97,12 +106,12 @@ class Gui(SimpleGladeApp):
         archivo = self.entry1.get_text() #obtiene la ruta desde la entrada
         text_buffer=gtk.TextBuffer()
         try:
-            text_buffer.set_text(str(getmd5(archivo)))#fijamos el hash en el buffer
+            text_buffer.set_text(str(getmd5(archivo)))#fija el hash en el buffer
         except:
             if (len(archivo) == 0):
-                self.error("No se especifico un archivo")
+                self.error(_("Please choose a file"))
             else:
-                self.error("No se puede abrir el archivo: " + archivo)
+                self.error(_("Can't open the file: ") + archivo)
         self.textview1.set_buffer(text_buffer)
         
 app = Gui("pysum.glade")
