@@ -46,8 +46,8 @@
 		      <property name="visible">True</property>
 		      <property name="label">gtk-open</property>
 		      <property name="use_stock">True</property>
-		      <signal name="activate" handler="on_button1_clicked" last_modification_time="Fri, 22 Aug 2008 03:48:02 GMT"/>
 		      <signal name="activate" handler="on_open1_activate" last_modification_time="Fri, 22 Aug 2008 03:16:39 GMT"/>
+		      <signal name="activate" handler="on_button1_clicked" last_modification_time="Fri, 22 Aug 2008 03:48:02 GMT"/>
 		    </widget>
 		  </child>
 
@@ -56,8 +56,8 @@
 		      <property name="visible">True</property>
 		      <property name="label">gtk-quit</property>
 		      <property name="use_stock">True</property>
-		      <signal name="activate" handler="gtk_main_quit" last_modification_time="Fri, 22 Aug 2008 03:45:08 GMT"/>
 		      <signal name="activate" handler="on_quit1_activate" last_modification_time="Fri, 22 Aug 2008 03:16:39 GMT"/>
+		      <signal name="activate" handler="gtk_main_quit" last_modification_time="Fri, 22 Aug 2008 03:45:08 GMT"/>
 		    </widget>
 		  </child>
 		</widget>
@@ -75,11 +75,23 @@
 		<widget class="GtkMenu" id="menuitem13_menu">
 
 		  <child>
-		    <widget class="GtkMenuItem" id="about1">
+		    <widget class="GtkImageMenuItem" id="about1">
 		      <property name="visible">True</property>
 		      <property name="label" translatable="yes">_About</property>
 		      <property name="use_underline">True</property>
 		      <signal name="activate" handler="on_about1_activate" last_modification_time="Fri, 22 Aug 2008 03:16:39 GMT"/>
+
+		      <child internal-child="image">
+			<widget class="GtkImage" id="image2">
+			  <property name="visible">True</property>
+			  <property name="stock">gtk-about</property>
+			  <property name="icon_size">1</property>
+			  <property name="xalign">0.5</property>
+			  <property name="yalign">0.5</property>
+			  <property name="xpad">0</property>
+			  <property name="ypad">0</property>
+			</widget>
+		      </child>
 		    </widget>
 		  </child>
 		</widget>

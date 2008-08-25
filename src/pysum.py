@@ -81,6 +81,7 @@ class Gui(SimpleGladeApp):
 
     # Ventana de error
     def error(self, message):
+        "Display the error dialog "
         dialog_error = gtk.MessageDialog(parent=None, flags=0, buttons=gtk.BUTTONS_OK)
         dialog_error.set_title(_("Error"))
         label = gtk.Label(message)
@@ -89,6 +90,15 @@ class Gui(SimpleGladeApp):
         dialog_error.run()
         dialog_error.destroy()
 
+    # Ventana Acerca de.
+    def about_info(self,data=None):
+        "Display the About dialog "
+        about = gtk.AboutDialog()
+        about.set_name("pySum")
+        about.set_version("0.1")
+        about.run()
+        about.destroy()
+
 # Declaramos las acciones a realizar (menus, botones, etc.):
 
     # Definimos las acciones de los menus
@@ -96,12 +106,12 @@ class Gui(SimpleGladeApp):
         "Called when the user wants to open a file"
         ruta_archivo = self.file_browse() #Obtiene el archivo 
         self.entry1.set_text(ruta_archivo)
-        
+
     # Definimos las acciones de los botones:
     def on_button1_clicked(self, widget):# Boton abrir
         ruta_archivo = self.file_browse() 
         self.entry1.set_text(ruta_archivo)
-        
+
     def on_button2_clicked(self, widget): #Boton calcular hash
         archivo = self.entry1.get_text() #obtiene la ruta desde la entrada
         text_buffer=gtk.TextBuffer()
@@ -113,6 +123,9 @@ class Gui(SimpleGladeApp):
             else:
                 self.error(_("Can't open the file: ") + archivo)
         self.textview1.set_buffer(text_buffer)
-        
+
+    def on_about1_activate(self, widget):
+        self.about_info()
+
 app = Gui("pysum.glade")
 app.run()
