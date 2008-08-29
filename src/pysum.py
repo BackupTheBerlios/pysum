@@ -2,7 +2,7 @@
 # -*- coding: UTF-8 -*-
 
 # pysum - A pygtk app to create and check md5 and other checksum 
-# Copyright (C) 2008 Daniel Fuentes B. <dbfuentes@gmail.com>
+# Copyright (C) 2008 Daniel Fuentes B. <dbfuentes gmail com>
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -37,6 +37,29 @@ _ = gettext.gettext
 gettext.textdomain("pysum")
 gtk.glade.textdomain("pysum")
 
+# Clase con la informacion del programa (para no escribir tanto)
+
+class Pysum:
+    "Store the program information"
+    name = "pySum"
+    version = "trunk rev04"
+    copyright = "Copyright © 2008 Daniel Fuentes B."
+    authors = ["Daniel Fuentes B. <dbfuentes@gmail.com>"]
+    website = "http://pysum.berlios.de/"
+    description = _("A pygtk application for create and verify md5 and other checksum")
+    license = "This program is free software; you can redistribute it and/or modify \
+it under the terms of the GNU General Public License as published by \
+the Free Software Foundation; either version 2 of the License, or \
+(at your option) any later version. \n\n\
+This program is distributed in the hope that it will be useful, but \
+WITHOUT ANY WARRANTY; without even the implied warranty of \
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. \
+See the GNU General Public License for more details. \n\n\
+You should have received a copy of the GNU General Public License \
+along with this program; if not, write to the Free Software Foundation, Inc., \
+51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA."
+
+
 # Definimos una funcion para obtener el hash de los archivos
 def getmd5(filename):
     "Calculate MD5 hash for a file without full-load in memory"
@@ -55,7 +78,7 @@ def getmd5(filename):
 
     fichero.close()
     return suma.hexdigest()
-	
+
 # Interfaz grafica (gtk-glade)
 # Clase para el Loop principal (de la interfaz grafica)
 
@@ -94,8 +117,22 @@ class Gui(SimpleGladeApp):
     def about_info(self,data=None):
         "Display the About dialog "
         about = gtk.AboutDialog()
-        about.set_name("pySum")
-        about.set_version("0.1")
+        about.set_name(Pysum.name)
+        about.set_version(Pysum.version)
+        about.set_comments(Pysum.description)
+        about.set_copyright(Pysum.copyright)
+
+        def openHomePage(widget,url,url2): #para abrir el sitio
+            import webbrowser
+            webbrowser.open_new(url)
+
+        gtk.about_dialog_set_url_hook(openHomePage,Pysum.website)
+        about.set_website(Pysum.website)
+
+        about.set_authors(Pysum.authors)
+        about.set_license(Pysum.license)
+        about.set_wrap_license(True) #Adapta el texto a la ventana
+
         about.run()
         about.destroy()
 

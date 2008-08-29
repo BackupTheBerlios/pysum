@@ -1,12 +1,17 @@
-2008-08-25  Daniel Fuentes B. <dbfuentes gmail com>
+2008-08-29  Daniel Fuentes B. <dbfuentes@gmail com>
 
-	* pysum.py: Add the About dialog
+	* src/pysum.py: Update the information on About dialog
+	* po/: Update the pysum.pot and es.po files
+
+2008-08-25  Daniel Fuentes B. <dbfuentes@gmail com>
+
+	* src/pysum.py: Add the About dialog
 	Add a ChangeLog file ( D'oh!)
 
-2008-08-23  Daniel Fuentes B. <dbfuentes gmail com>
+2008-08-23  Daniel Fuentes B. <dbfuentes@gmail com>
 
-	* pysum.py: Add support for i18n (gettext)
+	* src/pysum.py: Add support for i18n (gettext)
 
-2008-08-22  Daniel Fuentes B. <dbfuentes gmail com>
+2008-08-22  Daniel Fuentes B. <dbfuentes@gmail com>
 
 	* Initial release
