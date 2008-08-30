@@ -41,7 +41,7 @@ gtk.glade.textdomain("pysum")
 class Pysum:
     "Store the program information"
     name = "pySum"
-    version = "(trunk rev05)"
+    version = "0.1rc1"
     copyright = "Copyright © 2008 Daniel Fuentes B."
     authors = ["Daniel Fuentes B. <dbfuentes@gmail.com>"]
     website = "http://pysum.berlios.de/"

@@ -2,6 +2,7 @@
 
 	* src/pysum.py: Removed SimpleGladeApp from the dependencies
 	* src/SimpleGladeApp.py: Deleted the file
+	* Release 0.1rc1
 
 2008-08-29  Daniel Fuentes B. <dbfuentes@gmail com>
 
