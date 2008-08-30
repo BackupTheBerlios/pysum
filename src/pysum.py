@@ -2,7 +2,7 @@
 # -*- coding: UTF-8 -*-
 
 # pysum - A pygtk app to create and check md5 and other checksum 
-# Copyright (C) 2008 Daniel Fuentes B. <dbfuentes gmail com>
+# Copyright (C) 2008 Daniel Fuentes B. <dbfuentes@gmail.com>
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -28,7 +28,6 @@ import pygtk
 pygtk.require('2.0')
 import gtk
 import gtk.glade
-from SimpleGladeApp import SimpleGladeApp
 
 # Algunas cosas para gettext (i18n - traducciones)
 
@@ -42,7 +41,7 @@ gtk.glade.textdomain("pysum")
 class Pysum:
     "Store the program information"
     name = "pySum"
-    version = "trunk rev04"
+    version = "(trunk rev05)"
     copyright = "Copyright © 2008 Daniel Fuentes B."
     authors = ["Daniel Fuentes B. <dbfuentes@gmail.com>"]
     website = "http://pysum.berlios.de/"
@@ -82,7 +81,32 @@ def getmd5(filename):
 # Interfaz grafica (gtk-glade)
 # Clase para el Loop principal (de la interfaz grafica)
 
-class Gui(SimpleGladeApp):
+class Gui:
+    "This is the pysum application. This is a pyGTK window"
+    def __init__(self):
+        # Le indicamos al programa que archivo XML de glade usar.
+        self.widgets = gtk.glade.XML("pysum.glade")
+
+        # Creamos un diccionario con los manejadores definidos en glade
+        # y sus respectivas llamadas.
+        signals = {
+                   "on_button1_clicked" : self.on_button1_clicked,
+                   "on_button2_clicked" : self.on_button2_clicked,
+                   "on_open1_activate" : self.on_open1_activate,
+                   "on_about1_activate" : self.on_about1_activate,
+                   "gtk_main_quit" : gtk.main_quit,
+                   }
+
+        # Autoconectamos las signals.
+        self.widgets.signal_autoconnect(signals)
+
+        # Del archivo glade obtenemos los widgets a usar.
+        self.entry1 = self.widgets.get_widget("entry1")
+        self.textview1 = self.widgets.get_widget("textview1")
+
+
+# De aqui en adelante comienza las acciones propias del programa
+# Como las ventanas especiales y las acciones a realizar
 
     # Funcion para abrir archivos (dialogo abrir archivo)
     def file_browse(self):
@@ -94,7 +118,6 @@ class Gui(SimpleGladeApp):
         file_open = gtk.FileChooserDialog(title=_("Select a file")
                     , action=gtk.FILE_CHOOSER_ACTION_OPEN
                     , buttons=dialog_buttons)
-
         # regresar la ruta del archivo
         resultado = ""
         if file_open.run() == gtk.RESPONSE_OK:
@@ -128,18 +151,17 @@ class Gui(SimpleGladeApp):
 
         gtk.about_dialog_set_url_hook(openHomePage,Pysum.website)
         about.set_website(Pysum.website)
-
         about.set_authors(Pysum.authors)
         about.set_license(Pysum.license)
         about.set_wrap_license(True) #Adapta el texto a la ventana
-
         about.run()
         about.destroy()
+
 
 # Declaramos las acciones a realizar (menus, botones, etc.):
 
     # Definimos las acciones de los menus
-    def on_abrir1_activate(self, widget):
+    def on_open1_activate(self, widget): # Abrir desde el menu
         "Called when the user wants to open a file"
         ruta_archivo = self.file_browse() #Obtiene el archivo 
         self.entry1.set_text(ruta_archivo)
@@ -164,5 +186,6 @@ class Gui(SimpleGladeApp):
     def on_about1_activate(self, widget):
         self.about_info()
 
-app = Gui("pysum.glade")
-app.run()
+if __name__== "__main__":
+    Gui()
+    gtk.main()

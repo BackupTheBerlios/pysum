@@ -46,8 +46,7 @@
 		      <property name="visible">True</property>
 		      <property name="label">gtk-open</property>
 		      <property name="use_stock">True</property>
-		      <signal name="activate" handler="on_open1_activate" last_modification_time="Fri, 22 Aug 2008 03:16:39 GMT"/>
-		      <signal name="activate" handler="on_button1_clicked" last_modification_time="Fri, 22 Aug 2008 03:48:02 GMT"/>
+		      <signal name="activate" handler="on_open1_activate" last_modification_time="Sat, 30 Aug 2008 00:31:01 GMT"/>
 		    </widget>
 		  </child>
 
@@ -154,6 +153,7 @@
 	      <property name="has_frame">True</property>
 	      <property name="invisible_char">*</property>
 	      <property name="activates_default">False</property>
+	      <signal name="activate" handler="on_button1_clicked" last_modification_time="Sat, 30 Aug 2008 00:42:21 GMT"/>
 	    </widget>
 	    <packing>
 	      <property name="left_attach">1</property>

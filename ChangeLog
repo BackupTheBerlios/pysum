@@ -1,3 +1,8 @@
+2008-08-30  Daniel Fuentes B. <dbfuentes@gmail com>
+
+	* src/pysum.py: Removed SimpleGladeApp from the dependencies
+	* src/SimpleGladeApp.py: Deleted the file
+
 2008-08-29  Daniel Fuentes B. <dbfuentes@gmail com>
 
 	* src/pysum.py: Update the information on About dialog
@@ -6,7 +11,7 @@
 2008-08-25  Daniel Fuentes B. <dbfuentes@gmail com>
 
 	* src/pysum.py: Add the About dialog
-	Add a ChangeLog file ( D'oh!)
+	* Add a ChangeLog file ( D'oh!)
 
 2008-08-23  Daniel Fuentes B. <dbfuentes@gmail com>
 

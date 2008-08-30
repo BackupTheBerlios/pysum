@@ -18,6 +18,6 @@ $ python pysum.py
 
 == Translations (i18n) ==
 
-You can find the *.pot file and a spanish translation (.po and .mo files) in the /po directory.
+You can find the *.pot file and a spanish translation (.po files) in the /po directory.
 
-You can translate the *.pot file and generate a *.mo file. You should copy the *.mo files into your locate directory. For example, if you use a translation into Spanish, copy the es.mo file to /usr/share/locale/es/LC_MESSAGES/pysum.mo
+You can translate the *.pot or *.po file and generate a *.mo file. You should copy the *.mo file into your locate directory. For example, if you use a translation into Spanish, copy the *.mo file to: /usr/share/locale/es/LC_MESSAGES/pysum.mo
