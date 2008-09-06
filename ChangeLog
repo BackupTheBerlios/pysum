@@ -1,8 +1,17 @@
+2008-09-06  Daniel Fuentes B. <dbfuentes@gmail com>
+
+	* src/pysum.py: modifications to create a .deb package
+	* po/es.po: Update the translation
+	* Release 0.1
+
+2008-08-30  Daniel Fuentes B. <dbfuentes@gmail com>
+
+	* Release 0.1rc1: Add tag "0.1rc1" (rev06 svn)
+
 2008-08-30  Daniel Fuentes B. <dbfuentes@gmail com>
 
 	* src/pysum.py: Removed SimpleGladeApp from the dependencies
 	* src/SimpleGladeApp.py: Deleted the file
-	* Release 0.1rc1
 
 2008-08-29  Daniel Fuentes B. <dbfuentes@gmail com>
 

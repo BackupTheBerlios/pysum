@@ -1,0 +1,45 @@
+Installation Instructions
+*************************
+
+--------------
+Debian package
+--------------
+
+if you use debian, ubuntu, or some other similar distribution, install pysum
+using the .deb package (available on the project page)
+
+
+-----------
+Manual use
+-----------
+
+== Depends ==
+
+pysum depends on the Python runtime and associated libraries.
+
+Python (>= 2.4) : http://www.python.org
+PyGTK (>= 2.8) : http://www.pygtk.org
+
+== Source code ==
+
+You can find the source code of pysum in /src To run (without installing), in
+a terminal use the following syntax:
+
+$ cd src
+$ python pysum.py
+
+Copy the files in /src to the directory where you want (for example in your home,
+ in usr/share, etc.)
+
+Note: The *.glade file must be in the same directory as pysum.py
+
+== Translations ==
+
+You can find the *.pot file and a spanish translation (.po files) in the /po
+directory. The program use the default directory for translations (usually 
+/usr/share/locale/)
+
+You can translate the *.pot or *.po file (using poEdit, KBabel or gtranslator)
+and generate a *.mo file. You should copy the *.mo file into your locate
+directory. For example, if you use a translation into Spanish, copy the *.mo
+file to: /usr/share/locale/es/LC_MESSAGES/pysum.mo

@@ -2,7 +2,7 @@
 # -*- coding: UTF-8 -*-
 
 # pysum - A pygtk app to create and check md5 and other checksum 
-# Copyright (C) 2008 Daniel Fuentes B. <dbfuentes@gmail.com>
+# Copyright (C) 2008 Daniel Fuentes Barría <dbfuentes@gmail.com>
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -22,7 +22,7 @@
 # Importamos los modulos necesarios
 import md5
 import gettext
-import locale
+import os.path
 
 import pygtk
 pygtk.require('2.0')
@@ -41,9 +41,9 @@ gtk.glade.textdomain("pysum")
 class Pysum:
     "Store the program information"
     name = "pySum"
-    version = "0.1rc1"
+    version = "0.1"
     copyright = "Copyright © 2008 Daniel Fuentes B."
-    authors = ["Daniel Fuentes B. <dbfuentes@gmail.com>"]
+    authors = ["Daniel Fuentes Barría <dbfuentes@gmail.com>"]
     website = "http://pysum.berlios.de/"
     description = _("A pygtk application for create and verify md5 and other checksum")
     license = "This program is free software; you can redistribute it and/or modify \
@@ -85,7 +85,11 @@ class Gui:
     "This is the pysum application. This is a pyGTK window"
     def __init__(self):
         # Le indicamos al programa que archivo XML de glade usar.
-        self.widgets = gtk.glade.XML("pysum.glade")
+        # la comprobacion es para que funcione el paquete debian
+        if os.path.exists("pysum.glade"):
+            self.widgets = gtk.glade.XML("pysum.glade")
+        else:
+            self.widgets = gtk.glade.XML(os.path.join("/usr/share/pysum", "pysum.glade"))
 
         # Creamos un diccionario con los manejadores definidos en glade
         # y sus respectivas llamadas.

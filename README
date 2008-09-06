@@ -1,23 +1,26 @@
 pysum - A pygtk application for create and verify md5 and other checksum
 -------------------------------------------------------------------------
 
-This is a development version of pysum, some things are not finished
-
 pysum depends on the Python runtime and associated libraries.
 
 Python (>= 2.4) : http://www.python.org
 PyGTK (>= 2.8) : http://www.pygtk.org
 
-== To run pysum ==
 
-You can find the source code of pysum in /src
+= To install =
 
-To run, in a terminal use the following syntax:
-$ cd src
-$ python pysum.py
+If you use debian, ubuntu, or some other similar, please using the .deb package
+
+For more detailed instructions, please see the INSTALL file
+
 
 == Translations (i18n) ==
 
-You can find the *.pot file and a spanish translation (.po files) in the /po directory.
+You can find the *.pot file and a spanish translation (.po files) in the /po
+directory. The program use the default directory for translations (usually 
+/usr/share/locale/)
 
-You can translate the *.pot or *.po file and generate a *.mo file. You should copy the *.mo file into your locate directory. For example, if you use a translation into Spanish, copy the *.mo file to: /usr/share/locale/es/LC_MESSAGES/pysum.mo
+You can translate the *.pot or *.po file (using poEdit, KBabel or gtranslator)
+and generate a *.mo file. You should copy the *.mo file into your locate
+directory. For example, if you use a translation into Spanish, copy the *.mo
+file to: /usr/share/locale/es/LC_MESSAGES/pysum.mo
