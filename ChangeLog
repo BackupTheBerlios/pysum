@@ -1,32 +1,52 @@
-2008-09-06  Daniel Fuentes B. <dbfuentes@gmail com>
+2009-02-12  Daniel Fuentes B. <dbfuentes@gmail.com>
+
+	* branches/experimental is abandoned
+	* Working on trunk: Add support to sha1 (rev10 svn)
+	* src/pysum.py: Update code
+	* src/pysum.glade: Redesign the windows (add a ComboBox)
+
+2009-01-08  Daniel Fuentes B. <dbfuentes@gmail.com>
+
+	* Working on branches/experimental: the "check" windows partially work(r09)
+	* src/pysum.py: Update code. Working in the "check" windows
+	* src/pysum.glade: Update the Glade file
+
+2008-09-17  Daniel Fuentes B. <dbfuentes@gmail.com>
+
+	* Working on branches/experimental: Some things do not work (rev08 svn)
+	* src/pysum.py: Update the code for Gui
+	* src/pysum.glade: Redesign the windows
+
+2008-09-06  Daniel Fuentes B. <dbfuentes@gmail.com>
 
 	* src/pysum.py: modifications to create a .deb package
 	* po/es.po: Update the translation
 	* Release 0.1
 
-2008-08-30  Daniel Fuentes B. <dbfuentes@gmail com>
+2008-08-30  Daniel Fuentes B. <dbfuentes@gmail.com>
 
 	* Release 0.1rc1: Add tag "0.1rc1" (rev06 svn)
 
-2008-08-30  Daniel Fuentes B. <dbfuentes@gmail com>
+2008-08-30  Daniel Fuentes B. <dbfuentes@gmail.com>
 
 	* src/pysum.py: Removed SimpleGladeApp from the dependencies
 	* src/SimpleGladeApp.py: Deleted the file
 
-2008-08-29  Daniel Fuentes B. <dbfuentes@gmail com>
+2008-08-29  Daniel Fuentes B. <dbfuentes@gmailcom>
 
 	* src/pysum.py: Update the information on About dialog
 	* po/: Update the pysum.pot and es.po files
 
-2008-08-25  Daniel Fuentes B. <dbfuentes@gmail com>
+2008-08-25  Daniel Fuentes B. <dbfuentes@gmail.com>
 
 	* src/pysum.py: Add the About dialog
 	* Add a ChangeLog file ( D'oh!)
 
-2008-08-23  Daniel Fuentes B. <dbfuentes@gmail com>
+2008-08-23  Daniel Fuentes B. <dbfuentes@gmail.com>
 
 	* src/pysum.py: Add support for i18n (gettext)
 
-2008-08-22  Daniel Fuentes B. <dbfuentes@gmail com>
+2008-08-22  Daniel Fuentes B. <dbfuentes@gmail.com>
 
 	* Initial release
+
