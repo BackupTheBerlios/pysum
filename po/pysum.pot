@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-08-28 23:45-0400\n"
+"POT-Creation-Date: 2009-02-12 23:18-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,54 +16,60 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: pysum.py:49
+#: pysum.py:67
 msgid "A pygtk application for create and verify md5 and other checksum"
 msgstr ""
 
-#: pysum.py:69
+#: pysum.py:85 pysum.py:102 pysum.py:235
 msgid "Can't open the file:"
 msgstr ""
 
-#: pysum.py:94
+#: pysum.py:161
 msgid "Select a file"
 msgstr ""
 
-#: pysum.py:109
+#: pysum.py:174
 msgid "Error"
 msgstr ""
 
-#: pysum.py:159
+#: pysum.py:233
 msgid "Please choose a file"
 msgstr ""
 
-#: pysum.py:161
-msgid "Can't open the file: "
-msgstr ""
-
 #: pysum.glade.h:1
-msgid "File: "
+msgid "Checksum: "
 msgstr ""
 
 #: pysum.glade.h:2
-msgid "Get hash"
+msgid "File: "
 msgstr ""
 
 #: pysum.glade.h:3
-msgid "MD5 Sum: "
+msgid "Generate"
 msgstr ""
 
 #: pysum.glade.h:4
-msgid "_About"
+msgid "Hash type: "
 msgstr ""
 
 #: pysum.glade.h:5
-msgid "_File"
+msgid "_About"
 msgstr ""
 
 #: pysum.glade.h:6
-msgid "_Help"
+msgid "_File"
 msgstr ""
 
 #: pysum.glade.h:7
+msgid "_Help"
+msgstr ""
+
+#: pysum.glade.h:8
+msgid ""
+"md5\n"
+"sha1"
+msgstr ""
+
+#: pysum.glade.h:10
 msgid "pySum"
 msgstr ""

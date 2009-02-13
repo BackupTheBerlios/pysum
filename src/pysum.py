@@ -20,11 +20,8 @@
 
 ###### START EDIT HERE ###########
 
-# Directory with the files
+# Directory with the files (*.glade, icons, etc.)
 resources_dir = "/usr/share/pysum"
-
-# Locate Directory
-locate_dir = "/usr/share/locate"
 
 ###### STOP START EDIT HERE ######
 
@@ -36,16 +33,23 @@ import sha
 import gettext
 import os.path
 
+# importamos los modulos para la parte grafica
 try:
     import pygtk
     pygtk.require('2.0')
 except:
+    # Some distributions come with GTK2, but not pyGTK (or pyGTKv2)
     pass
-import gtk
-import gtk.glade
 
-# Algunas cosas para gettext (i18n - traducciones)
+try:
+    import gtk
+    import gtk.glade
+except:
+    print "You need to install pyGTK or GTKv2 or set your PYTHONPATH correctly"
+    sys.exit(1)
 
+
+# Algunas cosas para gettext (i18n / traducciones)
 _ = gettext.gettext
 
 gettext.textdomain("pysum")
@@ -228,7 +232,7 @@ class MainGui:
             if (len(archivo) == 0):
                 self.error(_("Please choose a file"))
             else:
-                self.error(_("Can't open the file: ") + archivo)
+                self.error(_("Can't open the file:") + archivo)
         # Se muestra el buffer (hash obtenido) en textview
         self.textview1.set_buffer(text_buffer)
 

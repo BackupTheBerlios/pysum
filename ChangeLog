@@ -1,3 +1,10 @@
+2009-02-13  Daniel Fuentes B. <dbfuentes@gmail.com>
+
+	* src/pysum.py: Code cleanup (Release 0.2 is close to appear)
+	* src/pysum.glade: Change the text of some labels
+	* po/pysum.pot: Update the .pot file
+	* Update the README and INSTALL files
+
 2009-02-12  Daniel Fuentes B. <dbfuentes@gmail.com>
 
 	* branches/experimental is abandoned

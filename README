@@ -7,20 +7,24 @@ Python (>= 2.4) : http://www.python.org
 PyGTK (>= 2.8) : http://www.pygtk.org
 
 
-= To install =
+== To run Source code (without installing) ==
+
+You can find the source code of pysum in /src. To run (without installing), in
+a terminal use the following syntax:
+
+$ cd src
+$ python pysum.py
+
+
+== To install ==
 
 If you use debian, ubuntu, or some other similar, please using the .deb package
+to install pySum
 
-For more detailed instructions, please see the INSTALL file
+For more detailed instructions (And generic installation instructions), please
+see the INSTALL file
 
 
-== Translations (i18n) ==
+== Translations (i18n/gettext) ==
 
-You can find the *.pot file and a spanish translation (.po files) in the /po
-directory. The program use the default directory for translations (usually 
-/usr/share/locale/)
-
-You can translate the *.pot or *.po file (using poEdit, KBabel or gtranslator)
-and generate a *.mo file. You should copy the *.mo file into your locate
-directory. For example, if you use a translation into Spanish, copy the *.mo
-file to: /usr/share/locale/es/LC_MESSAGES/pysum.mo
+please view the instructions in the INSTALL file
