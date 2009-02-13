@@ -209,7 +209,7 @@
 		  <child>
 		    <widget class="GtkComboBox" id="combobox1">
 		      <property name="visible">True</property>
-		      <property name="items" translatable="yes">md5
+		      <property name="items">md5
 sha1</property>
 		      <property name="add_tearoffs">False</property>
 		      <property name="focus_on_click">True</property>

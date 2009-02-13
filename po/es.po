@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pysum\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-12 23:18-0300\n"
-"PO-Revision-Date: 2009-02-12 23:29-0300\n"
+"POT-Creation-Date: 2009-02-13 09:21-0300\n"
+"PO-Revision-Date: 2009-02-13 18:43-0300\n"
 "Last-Translator: Daniel Fuentes Barría <dbfuentes@gmail.com>\n"
 "Language-Team: Spanish\n"
 "MIME-Version: 1.0\n"
@@ -39,7 +39,7 @@ msgstr "Por favor seleccione un archivo"
 
 #: pysum.glade.h:1
 msgid "Checksum: "
-msgstr ""
+msgstr "Checksum: "
 
 #: pysum.glade.h:2
 msgid "File: "
@@ -47,11 +47,11 @@ msgstr "Archivo: "
 
 #: pysum.glade.h:3
 msgid "Generate"
-msgstr ""
+msgstr "Generar"
 
 #: pysum.glade.h:4
 msgid "Hash type: "
-msgstr ""
+msgstr "Tipo de Hash: "
 
 #: pysum.glade.h:5
 msgid "_About"
@@ -66,12 +66,6 @@ msgid "_Help"
 msgstr "A_yuda"
 
 #: pysum.glade.h:8
-msgid ""
-"md5\n"
-"sha1"
-msgstr ""
-
-#: pysum.glade.h:10
 msgid "pySum"
 msgstr "pySum"
 

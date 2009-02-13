@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-12 23:18-0300\n"
+"POT-Creation-Date: 2009-02-13 09:21-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -65,11 +65,5 @@ msgid "_Help"
 msgstr ""
 
 #: pysum.glade.h:8
-msgid ""
-"md5\n"
-"sha1"
-msgstr ""
-
-#: pysum.glade.h:10
 msgid "pySum"
 msgstr ""
