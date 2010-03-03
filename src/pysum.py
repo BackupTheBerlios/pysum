@@ -18,14 +18,35 @@
 # with this program; if not, write to the Free Software Foundation, Inc.,
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
-###### START EDIT HERE ###########
+
+####### START EDIT HERE ###########
 
 # Directory with the files (*.glade, icons, etc.)
 resources_dir = "/usr/share/pysum"
 
-###### STOP START EDIT HERE ######
+####### STOP EDIT HERE ############
 
 
+# Informacion del programa que se modifica con cierta frecuencia
+# (para no escribir tanto)
+
+__version__ = "Svn revision 14"
+
+authors = "Daniel Fuentes Barría <dbfuentes@gmail.com>"
+website = "http://pysum.berlios.de/"
+license = "This program is free software; you can redistribute \
+it and/or modify it under the terms of the GNU General Public License as \
+published by the Free Software Foundation; either version 2 of the \
+License, or (at your option) any later version. \n\nThis program is \
+distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; \
+without even the implied warranty of MERCHANTABILITY or FITNESS FOR A \
+PARTICULAR PURPOSE. \
+See the GNU General Public License for more details. \n\nYou should have \
+received a copy of the GNU General Public License along with this program; \
+if not, write to the Free Software Foundation, Inc., 51 Franklin Street, \
+Fifth Floor, Boston, MA 02110-1301, USA."
+
+# ---------------------------------------------------------------------
 # Importamos los modulos necesarios
 
 import hashlib
@@ -54,32 +75,8 @@ _ = gettext.gettext
 gettext.textdomain("pysum")
 gtk.glade.textdomain("pysum")
 
-# Clase con la informacion del programa (para no escribir tanto)
 
-
-class Pysum:
-    """Store the program information"""
-
-    version = "0.2"
-    copyright = "Copyright © 2008-2009 Daniel Fuentes B."
-    authors = ["Daniel Fuentes Barría <dbfuentes@gmail.com>"]
-    website = "http://pysum.berlios.de/"
-    description = _("A pygtk application for create and verify \
-    md5 and other checksum")
-    license = "This program is free software; you can redistribute \
-it and/or modify it under the terms of the GNU General Public License as \
-published by the Free Software Foundation; either version 2 of the \
-License, or (at your option) any later version. \n\nThis program is \
-distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; \
-without even the implied warranty of MERCHANTABILITY or FITNESS FOR A \
-PARTICULAR PURPOSE. \
-See the GNU General Public License for more details. \n\nYou should have \
-received a copy of the GNU General Public License along with this program; \
-if not, write to the Free Software Foundation, Inc., 51 Franklin Street, \
-Fifth Floor, Boston, MA 02110-1301, USA."
-
-
-# Las siguientes Claseas/funciones calculan los hash del un archivo.
+# Las siguientes Clases/funciones calculan los hash del un archivo.
 # Es importante que el .read() se realice por partes para no
 # llenar la memoria
 
@@ -115,8 +112,30 @@ class hashfile():
         self.archivo.close()
         return suma.hexdigest()
 
-# Función que obtiene el texto de la opcion seleccionada en un ComboBox
+    def getsha256(self):
+    # Definimos una funcion para obtener el hash sha256 de los archivos
+        suma = hashlib.sha256()
+        while True:
+            data = self.archivo.read(10240)
+            if not data:
+                break
+            suma.update(data)
+        self.archivo.close()
+        return suma.hexdigest()
 
+    def getsha512(self):
+    # Definimos una funcion para obtener el hash sha512 de los archivos
+        suma = hashlib.sha512()
+        while True:
+            data = self.archivo.read(10240)
+            if not data:
+                break
+            suma.update(data)
+        self.archivo.close()
+        return suma.hexdigest()
+
+
+# Función que obtiene el texto de la opcion seleccionada en un ComboBox
 
 def valor_combobox(combobox):
     model = combobox.get_model()
@@ -124,6 +143,7 @@ def valor_combobox(combobox):
     if activo < 0:
         return None
     return model[activo][0]
+
 
 # Interfaz grafica (gtk-glade)
 # Clase para el Loop principal (de la interfaz grafica)
@@ -195,18 +215,19 @@ class MainGui:
         "Display the About dialog"
         about = gtk.AboutDialog()
         about.set_name("pySum")
-        about.set_version(Pysum.version)
-        about.set_comments(Pysum.description)
-        about.set_copyright(Pysum.copyright)
+        about.set_version(__version__)
+        about.set_comments(_("A pygtk application for create and \
+verify md5 and other checksum"))
+        about.set_copyright("Copyright © 2008-2010 Daniel Fuentes B.")
 
         def openHomePage(widget, url, url2): # Para abrir el sitio
             import webbrowser
             webbrowser.open_new(url)
 
-        gtk.about_dialog_set_url_hook(openHomePage, Pysum.website)
-        about.set_website(Pysum.website)
-        about.set_authors(Pysum.authors)
-        about.set_license(Pysum.license)
+        gtk.about_dialog_set_url_hook(openHomePage, website)
+        about.set_website(website)
+        about.set_authors([authors])
+        about.set_license(license)
         about.set_wrap_license(True) # Adapta el texto a la ventana
         about.run()
         about.destroy()
@@ -233,7 +254,8 @@ class MainGui:
         # Comprobamos la opcion elegida en el ComboBox
         combobox_selec = valor_combobox(self.combobox1)
         # Se obtiene la ruta del archivo desde la entrada y crea un buffer
-        archivo = hashfile(self.entry1.get_text())
+        texto_entry1 = self.entry1.get_text()
+        archivo = hashfile(texto_entry1)
         # Se intenta obtener el hash, dependiendo de la opcion escogida en
         # el ComboBox hay que obtener el hash correcto (md5, sha-1, etc)
         try:
@@ -241,11 +263,15 @@ class MainGui:
                 text_buffer.set_text(str(archivo.getmd5()))
             elif combobox_selec == "sha1":
                 text_buffer.set_text(str(archivo.getsha1()))
+            elif combobox_selec == "sha256":
+                text_buffer.set_text(str(archivo.getsha256()))
+            elif combobox_selec == "sha512":
+                text_buffer.set_text(str(archivo.getsha512()))
         except:
-            if (len(archivo) == 0):
+            if (len(texto_entry1) == 0):
                 self.error(_("Please choose a file"))
             else:
-                self.error(_("Can't open the file:") + archivo)
+                self.error(_("Can't open the file:") + texto_entry1)
         # Se muestra el buffer (hash obtenido) en textview
         self.textview1.set_buffer(text_buffer)
 
