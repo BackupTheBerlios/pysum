@@ -25,7 +25,7 @@ missing!
 
 pysum depends on the Python runtime and associated libraries.
 
-Python (>= 2.4) : http://www.python.org
+Python (>= 2.5) : http://www.python.org
 PyGTK (>= 2.8) : http://www.pygtk.org
 
 == Run Source code (without installing) ==
@@ -43,7 +43,7 @@ usr/share, etc.)
 
 Note: To work the pysum.glade file must be in the same directory as pysum.py
 OR else you have to edit the value of resources_dir specifying the location of
-the directory (aprox. lines 22-24 in pysum.py)
+the directory (aprox. lines 22-26 in pysum.py)
 
 
 --------------

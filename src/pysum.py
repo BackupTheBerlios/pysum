@@ -30,7 +30,7 @@ resources_dir = "/usr/share/pysum"
 # Informacion del programa que se modifica con cierta frecuencia
 # (para no escribir tanto)
 
-__version__ = "Svn revision 14"
+__version__ = "0.3"
 
 authors = "Daniel Fuentes Barría <dbfuentes@gmail.com>"
 website = "http://pysum.berlios.de/"

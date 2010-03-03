@@ -1,5 +1,11 @@
 2010-03-03  Daniel Fuentes B. <dbfuentes@gmail.com>
 
+	* po/pysum.pot: Update the .pot file
+	* po/es.po: Update the translation
+	* Release 0.3
+
+2010-03-03  Daniel Fuentes B. <dbfuentes@gmail.com>
+
 	* src/pysum.py: added support for sha256 and sha512
 
 2010-03-03  Daniel Fuentes B. <dbfuentes@gmail.com>
