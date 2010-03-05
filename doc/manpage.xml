@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<?asciidoc-toc?>
+<?asciidoc-numbered?>
+<refentry lang="en">
+<refmeta>
+<refentrytitle>pysum</refentrytitle>
+<manvolnum>1</manvolnum>
+<refmiscinfo class="source">&nbsp;</refmiscinfo>
+<refmiscinfo class="manual">&nbsp;</refmiscinfo>
+</refmeta>
+<refnamediv>
+    <refname>pysum</refname>
+    <refpurpose>A simple pygtk application for create md5 and other checksum</refpurpose>
+</refnamediv>
+<refsynopsisdiv id="_synopsis">
+<simpara><emphasis role="strong">pysum</emphasis></simpara>
+</refsynopsisdiv>
+<refsect1 id="_descripcion">
+<title>DESCRIPCION</title>
+<simpara>pysum is a simple pygtk application for create and verify md5,
+sha-1, sha-256 and other checksum. Written in python using PyGTK
+and it&#8217;s licensed under the GPL.</simpara>
+</refsect1>
+<refsect1 id="_bugs">
+<title>BUGS</title>
+<simpara>You can enter a bug into the Berlios Bug Tracking System, this
+system can be found on
+<ulink url="http://developer.berlios.de/bugs/?group_id=9993">http://developer.berlios.de/bugs/?group_id=9993</ulink></simpara>
+</refsect1>
+<refsect1 id="_author">
+<title>AUTHOR</title>
+<simpara>Written by Daniel Fuentes B. <email>dbfuentes@gmail.com</email></simpara>
+</refsect1>
+<refsect1 id="_copying">
+<title>COPYING</title>
+<simpara>Copyright &#169; 2008-2010 Daniel Fuentes B. Free use of this software is
+granted under the terms of the GNU General Public License (GPL).</simpara>
+</refsect1>
+</refentry>
