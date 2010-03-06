@@ -20,7 +20,7 @@ BUGS
 ----
 You can enter a bug into the Berlios Bug Tracking System, this
 system can be found on
-http://developer.berlios.de/bugs/?group_id=9993
+https://developer.berlios.de/mantis/set_project.php?project_id=9993
 
 AUTHOR
 ------

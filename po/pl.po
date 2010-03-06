@@ -1,0 +1,71 @@
+# Polish translation for pysum
+# Copyright (c) 2009 Rosetta Contributors and Canonical Ltd 2009
+# This file is distributed under the same license as the pysum package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2009.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: pysum\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-03-03 18:16-0300\n"
+"PO-Revision-Date: 2009-04-28 18:15+0000\n"
+"Last-Translator: lusmanko <Unknown>\n"
+"Language-Team: Polish <pl@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2010-03-03 21:28+0000\n"
+"X-Generator: Launchpad (build Unknown)\n"
+
+#: pysum.py:91 pysum.py:274
+msgid "Can't open the file:"
+msgstr "Nie można otworzyć pliku:"
+
+#: pysum.py:192
+msgid "Select a file"
+msgstr "Wybierz plik"
+
+#: pysum.py:206
+msgid "Error"
+msgstr "Błąd"
+
+#: pysum.py:219
+msgid "A pygtk application for create and verify md5 and other checksum"
+msgstr ""
+"Aplikacja pygtk do tworzenia i weryfikacji md5 i innych sum kontrolnych"
+
+#: pysum.py:272
+msgid "Please choose a file"
+msgstr "Proszę wybrać plik"
+
+#: pysum.glade.h:1
+msgid "Checksum: "
+msgstr "Suma kontrolna: "
+
+#: pysum.glade.h:2
+msgid "File: "
+msgstr "Plik: "
+
+#: pysum.glade.h:3
+msgid "Generate"
+msgstr "Generuj"
+
+#: pysum.glade.h:4
+msgid "Hash type: "
+msgstr "Typ \"hasha\": "
+
+#: pysum.glade.h:5
+msgid "_About"
+msgstr "_O programie"
+
+#: pysum.glade.h:6
+msgid "_File"
+msgstr "_Plik"
+
+#: pysum.glade.h:7
+msgid "_Help"
+msgstr "_Pomoc"
+
+#: pysum.glade.h:8
+msgid "pySum"
+msgstr "pySum"

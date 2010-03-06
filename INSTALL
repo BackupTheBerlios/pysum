@@ -1,12 +1,13 @@
 Installation Instructions
-*************************
+=========================
 
 ----------------
  Debian package
 ----------------
 
 if you use debian, ubuntu, or some other similar distribution, install pysum
-using the .deb package (available on the project page)
+using the .deb package (available on the project page
+https://developer.berlios.de/project/showfiles.php?group_id=9993)
 
 1. Download your chosen .deb package via wget or another method
 
@@ -50,15 +51,5 @@ the directory (aprox. lines 22-26 in pysum.py)
  Translations
 --------------
 
-You can find the *.pot file and a spanish translation (es.po files) in the /po
-directory. The program use the default directory for translations (usually 
-/usr/share/locale/ on a GNU/Linux, but on Solaris it is /usr/lib/locale)
+Check the /po directory for instructions
 
-NOTE: In Launchpad ( https://translations.launchpad.net/pysum ) you can find
-translations for more languages
-
-You can translate the *.pot or *.po file (using poEdit, KBabel, gtranslator or
-launchpad) and next generate a *.mo file. You should copy the *.mo file into
-your locate directory (on GNU/Linux: localedir/language/LC_MESSAGES/pysum.mo).
-For example, if you use a translation into Spanish, copy the *.mo file to:
-/usr/share/locale/es/LC_MESSAGES/pysum.mo
