@@ -23,6 +23,7 @@
 
 # Directory with the files (*.glade, icons, etc.)
 resources_dir = "/usr/share/pysum"
+img_dir = "/usr/share/pysum"
 
 ####### STOP EDIT HERE ############
 
@@ -30,7 +31,7 @@ resources_dir = "/usr/share/pysum"
 # Informacion del programa que se modifica con cierta frecuencia
 # (para no escribir tanto)
 
-__version__ = "r18"
+__version__ = "rev19"
 
 authors = "Daniel Fuentes Barría <dbfuentes@gmail.com>"
 website = "http://pysum.berlios.de/"
@@ -52,6 +53,7 @@ Fifth Floor, Boston, MA 02110-1301, USA."
 import hashlib
 import gettext
 import os.path
+from os import pardir
 
 # importamos los modulos para la parte grafica
 try:
@@ -172,12 +174,29 @@ class MainGui:
         self.widgets.signal_autoconnect(signals)
 
         ## Del archivo glade obtenemos los widgets a usar
-        # widgets de la pestaña para obtener hash
+        # estas widgets son de las pestaña para obtener hash
         self.entry1 = self.widgets.get_widget("entry1")
         self.textview1 = self.widgets.get_widget("textview1")
+
         # En el ComboBox hay que seleccionar por defecto la primera opcion
         self.combobox1 = self.widgets.get_widget("combobox1")
         self.combobox1.set_active(0) # Fijamos el primer elemento de la lista
+
+
+        # Similar al .glade, hay que determinar donde esta el icono del programa
+        # primero asumimos que esta en el directorio de las fuentes (trunk/img/)
+        self.icono = os.path.join(os.pardir, "img", "pysum.png")
+        if os.path.exists(self.icono) == False:
+            # si no esta alli, cambiamos la ruta a la definida en img_dir
+            self.icono = os.path.join(img_dir, "pysum.png")
+
+        # Ahora le agregamos el icono a la ventana
+        self.mainwindow = self.widgets.get_widget("mainwindow")
+        try:
+            self.mainwindow.set_icon_from_file(self.icono)
+        except:
+            print "Error: no se puede cargar el icono: %s" % (self.icono)
+
 
     # De aqui en adelante comienza las acciones propias del programa
     # Como las ventanas especiales y las acciones a realizar
@@ -225,10 +244,15 @@ verify md5 and other checksum"))
             webbrowser.open_new(url)
 
         gtk.about_dialog_set_url_hook(openHomePage, website)
+        try:
+            about.set_logo(gtk.gdk.pixbuf_new_from_file(self.icono))
+        except:
+            print "Error: no se puede cargar el icono: %s" % (self.icono)
         about.set_website(website)
         about.set_authors([authors])
         about.set_license(license)
         about.set_wrap_license(True) # Adapta el texto a la ventana
+
         about.run()
         about.destroy()
 

@@ -61,7 +61,7 @@ msgstr "_Archivo"
 
 #: pysum.glade.h:7
 msgid "_Help"
-msgstr "A_yuda"
+msgstr "Ay_uda"
 
 #: pysum.glade.h:8
 msgid "pySum"
