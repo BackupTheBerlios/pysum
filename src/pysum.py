@@ -50,10 +50,11 @@ Fifth Floor, Boston, MA 02110-1301, USA."
 # ---------------------------------------------------------------------
 # Importamos los modulos necesarios
 
-import hashlib
 import gettext
 import os.path
 from os import pardir
+import hashlib
+import zlib
 
 # importamos los modulos para la parte grafica
 try:
@@ -136,6 +137,24 @@ class hashfile():
         self.archivo.close()
         return suma.hexdigest()
 
+    def getcrc32(self):
+        # hay dos crc32 en python, la de zlib y la de binascii
+        # de las 2 zlib es más rapida (por lo que se usa esa)
+        suma = 0
+        while True:
+            data = self.archivo.read(10240)
+            if not data:
+                break
+            suma = zlib.crc32(data, suma)
+        self.archivo.close()
+        # por defecto python 2.x muestra un valor entre :
+        # -2147483648, 2147483648 (32-bit) y 0, 4294967296 (64-bit)
+        # Se arregla con el sig if (Ver http://bugs.python.org/issue1202)
+        if suma < 0:
+            #suma = (long(suma) + 4294967296L)
+            suma = suma & 0xffffffffL
+        return "%08x" % suma
+
 
 # Función que obtiene el texto de la opcion seleccionada en un ComboBox
 
@@ -180,7 +199,7 @@ class MainGui:
 
         # En el ComboBox hay que seleccionar por defecto la primera opcion
         self.combobox1 = self.widgets.get_widget("combobox1")
-        self.combobox1.set_active(0) # Fijamos el primer elemento de la lista
+        self.combobox1.set_active(1) # Fijamos el segundo elemento de la lista
 
 
         # Similar al .glade, hay que determinar donde esta el icono del programa
@@ -291,6 +310,8 @@ verify md5 and other checksum"))
                 text_buffer.set_text(str(archivo.getsha256()))
             elif combobox_selec == "sha512":
                 text_buffer.set_text(str(archivo.getsha512()))
+            elif combobox_selec == "crc32":
+                text_buffer.set_text(str(archivo.getcrc32()))
         except:
             if (len(texto_entry1) == 0):
                 self.error(_("Please choose a file"))
