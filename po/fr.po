@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pysum\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-03-03 18:16-0300\n"
+"POT-Creation-Date: 2010-03-07 10:38-0300\n"
 "PO-Revision-Date: 2009-09-29 18:17+0000\n"
 "Last-Translator: François Blondel <Unknown>\n"
 "Language-Team: French <fr@li.org>\n"
@@ -17,23 +17,23 @@ msgstr ""
 "X-Launchpad-Export-Date: 2010-03-03 21:28+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: pysum.py:91 pysum.py:274
+#: pysum.py:95 pysum.py:342
 msgid "Can't open the file:"
 msgstr "Impossible d'ouvrir le fichier:"
 
-#: pysum.py:192
+#: pysum.py:249
 msgid "Select a file"
 msgstr "Choisissez un fichier"
 
-#: pysum.py:206
+#: pysum.py:263
 msgid "Error"
 msgstr "Erreur"
 
-#: pysum.py:219
+#: pysum.py:276
 msgid "A pygtk application for create and verify md5 and other checksum"
 msgstr "Une application en pygtk pour créer et vérifier le md5 ainsi que d'autres sommes de de contrôle"
 
-#: pysum.py:272
+#: pysum.py:340
 msgid "Please choose a file"
 msgstr "Veuillez choisir un fichier"
 
@@ -65,6 +65,5 @@ msgstr "_Fichier"
 msgid "_Help"
 msgstr "_Aide"
 
-#: pysum.glade.h:8
-msgid "pySum"
-msgstr "pySum"
+#~ msgid "pySum"
+#~ msgstr "pySum"

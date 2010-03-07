@@ -19,20 +19,20 @@
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 
-####### START EDIT HERE ###########
+########### START EDIT HERE ###########
 
 # Directory with the files (*.glade)
 resources_dir = "/usr/share/pysum"
 # Directory with the img. (icons)
 img_dir = "/usr/share/pysum"
 
-####### STOP EDIT HERE ############
+########### STOP EDIT HERE ############
 
 
 # Informacion del programa que se modifica con cierta frecuencia
 # (para no escribir tanto)
 
-__version__ = "rev21"
+__version__ = "0.4"
 
 authors = "Daniel Fuentes Barría <dbfuentes@gmail.com>"
 website = "http://pysum.berlios.de/"
@@ -333,7 +333,7 @@ verify md5 and other checksum"))
                 text_buffer.set_text(str(archivo.getsha384()))
             elif combobox_selec == "sha512":
                 text_buffer.set_text(str(archivo.getsha512()))
-            elif combobox_selec == "crc32":
+            elif combobox_selec == "CRC32":
                 text_buffer.set_text(str(archivo.getcrc32()))
         except:
             if (len(texto_entry1) == 0):

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-03-03 18:16-0300\n"
+"POT-Creation-Date: 2010-03-07 10:38-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,23 +16,23 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: pysum.py:91 pysum.py:274
+#: pysum.py:95 pysum.py:342
 msgid "Can't open the file:"
 msgstr ""
 
-#: pysum.py:192
+#: pysum.py:249
 msgid "Select a file"
 msgstr ""
 
-#: pysum.py:206
+#: pysum.py:263
 msgid "Error"
 msgstr ""
 
-#: pysum.py:219
+#: pysum.py:276
 msgid "A pygtk application for create and verify md5 and other checksum"
 msgstr ""
 
-#: pysum.py:272
+#: pysum.py:340
 msgid "Please choose a file"
 msgstr ""
 
@@ -62,8 +62,4 @@ msgstr ""
 
 #: pysum.glade.h:7
 msgid "_Help"
-msgstr ""
-
-#: pysum.glade.h:8
-msgid "pySum"
 msgstr ""

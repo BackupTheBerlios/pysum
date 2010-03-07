@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pysum\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-03-03 18:16-0300\n"
+"POT-Creation-Date: 2010-03-07 10:38-0300\n"
 "PO-Revision-Date: 2009-05-06 16:08+0000\n"
 "Last-Translator: Jimmy Frydkær Jensen <thewolf40@mailme.dk>\n"
 "Language-Team: Danish <da@li.org>\n"
@@ -17,23 +17,23 @@ msgstr ""
 "X-Launchpad-Export-Date: 2010-03-03 21:28+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: pysum.py:91 pysum.py:274
+#: pysum.py:95 pysum.py:342
 msgid "Can't open the file:"
 msgstr "Kan ikke åbne filen:"
 
-#: pysum.py:192
+#: pysum.py:249
 msgid "Select a file"
 msgstr "Vælg en fil"
 
-#: pysum.py:206
+#: pysum.py:263
 msgid "Error"
 msgstr "Fejl"
 
-#: pysum.py:219
+#: pysum.py:276
 msgid "A pygtk application for create and verify md5 and other checksum"
 msgstr "Et pygtk-program til at oprette og verificere md5 og andre check-summer"
 
-#: pysum.py:272
+#: pysum.py:340
 msgid "Please choose a file"
 msgstr "Vælg venligst en fil"
 
@@ -65,6 +65,5 @@ msgstr "_Fil"
 msgid "_Help"
 msgstr "_Hjælp"
 
-#: pysum.glade.h:8
-msgid "pySum"
-msgstr "pySum"
+#~ msgid "pySum"
+#~ msgstr "pySum"

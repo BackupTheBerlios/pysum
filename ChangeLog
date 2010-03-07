@@ -1,17 +1,17 @@
 2010-03-07  Daniel Fuentes B. <dbfuentes@gmail.com>
 
-	* src/pysum.py: added support for Sha224 and sha384
+	* po/pysum.pot: Update the .pot file
+	* po/: Update the translations
+	* Release 0.4
 
 2010-03-07  Daniel Fuentes B. <dbfuentes@gmail.com>
 
+	* src/pysum.py: added support for Sha224 and sha384
 	* src/pysum.py: added support for CRC32
 
 2010-03-06  Daniel Fuentes B. <dbfuentes@gmail.com>
 
 	* po/: Add logo
-
-2010-03-06  Daniel Fuentes B. <dbfuentes@gmail.com>
-
 	* po/: Add translations
 
 2010-03-05  Daniel Fuentes B. <dbfuentes@gmail.com>
@@ -27,9 +27,6 @@
 2010-03-03  Daniel Fuentes B. <dbfuentes@gmail.com>
 
 	* src/pysum.py: added support for sha256 and sha512
-
-2010-03-03  Daniel Fuentes B. <dbfuentes@gmail.com>
-
 	* src/pysum.py: small modifications (now use libhash)
 
 2009-02-13  Daniel Fuentes B. <dbfuentes@gmail.com>
