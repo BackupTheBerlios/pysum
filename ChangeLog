@@ -1,5 +1,9 @@
 2010-03-07  Daniel Fuentes B. <dbfuentes@gmail.com>
 
+	* src/pysum.py: added support for Sha224 and sha384
+
+2010-03-07  Daniel Fuentes B. <dbfuentes@gmail.com>
+
 	* src/pysum.py: added support for CRC32
 
 2010-03-06  Daniel Fuentes B. <dbfuentes@gmail.com>

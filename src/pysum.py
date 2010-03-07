@@ -21,8 +21,9 @@
 
 ####### START EDIT HERE ###########
 
-# Directory with the files (*.glade, icons, etc.)
+# Directory with the files (*.glade)
 resources_dir = "/usr/share/pysum"
+# Directory with the img. (icons)
 img_dir = "/usr/share/pysum"
 
 ####### STOP EDIT HERE ############
@@ -31,7 +32,7 @@ img_dir = "/usr/share/pysum"
 # Informacion del programa que se modifica con cierta frecuencia
 # (para no escribir tanto)
 
-__version__ = "rev19"
+__version__ = "rev21"
 
 authors = "Daniel Fuentes Barría <dbfuentes@gmail.com>"
 website = "http://pysum.berlios.de/"
@@ -115,8 +116,17 @@ class hashfile():
         self.archivo.close()
         return suma.hexdigest()
 
+    def getsha224(self):
+        suma = hashlib.sha224()
+        while True:
+            data = self.archivo.read(10240)
+            if not data:
+                break
+            suma.update(data)
+        self.archivo.close()
+        return suma.hexdigest()
+
     def getsha256(self):
-    # Definimos una funcion para obtener el hash sha256 de los archivos
         suma = hashlib.sha256()
         while True:
             data = self.archivo.read(10240)
@@ -126,8 +136,17 @@ class hashfile():
         self.archivo.close()
         return suma.hexdigest()
 
+    def getsha384(self):
+        suma = hashlib.sha384()
+        while True:
+            data = self.archivo.read(10240)
+            if not data:
+                break
+            suma.update(data)
+        self.archivo.close()
+        return suma.hexdigest()
+
     def getsha512(self):
-    # Definimos una funcion para obtener el hash sha512 de los archivos
         suma = hashlib.sha512()
         while True:
             data = self.archivo.read(10240)
@@ -139,7 +158,7 @@ class hashfile():
 
     def getcrc32(self):
         # hay dos crc32 en python, la de zlib y la de binascii
-        # de las 2 zlib es más rapida (por lo que se usa esa)
+        # de las dos anteriores, zlib es más rapida (por lo que se usa esa)
         suma = 0
         while True:
             data = self.archivo.read(10240)
@@ -149,7 +168,7 @@ class hashfile():
         self.archivo.close()
         # por defecto python 2.x muestra un valor entre :
         # -2147483648, 2147483648 (32-bit) y 0, 4294967296 (64-bit)
-        # Se arregla con el sig if (Ver http://bugs.python.org/issue1202)
+        # Se arregla con el sig. if: (Ver http://bugs.python.org/issue1202)
         if suma < 0:
             #suma = (long(suma) + 4294967296L)
             suma = suma & 0xffffffffL
@@ -202,8 +221,8 @@ class MainGui:
         self.combobox1.set_active(1) # Fijamos el segundo elemento de la lista
 
 
-        # Similar al .glade, hay que determinar donde esta el icono del programa
-        # primero asumimos que esta en el directorio de las fuentes (trunk/img/)
+    # Similar al .glade, hay que determinar donde esta el icono del programa
+    # primero asumimos que esta en el directorio de las fuentes (trunk/img/)
         self.icono = os.path.join(os.pardir, "img", "pysum.png")
         if os.path.exists(self.icono) == False:
             # si no esta alli, cambiamos la ruta a la definida en img_dir
@@ -306,8 +325,12 @@ verify md5 and other checksum"))
                 text_buffer.set_text(str(archivo.getmd5()))
             elif combobox_selec == "sha1":
                 text_buffer.set_text(str(archivo.getsha1()))
+            elif combobox_selec == "sha224":
+                text_buffer.set_text(str(archivo.getsha224()))
             elif combobox_selec == "sha256":
                 text_buffer.set_text(str(archivo.getsha256()))
+            elif combobox_selec == "sha384":
+                text_buffer.set_text(str(archivo.getsha384()))
             elif combobox_selec == "sha512":
                 text_buffer.set_text(str(archivo.getsha512()))
             elif combobox_selec == "crc32":
