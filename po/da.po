@@ -1,0 +1,69 @@
+# Danish translation for pysum
+# Copyright (c) 2009 Rosetta Contributors and Canonical Ltd 2009
+# This file is distributed under the same license as the pysum package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2009.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: pysum\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-03-07 10:38-0300\n"
+"PO-Revision-Date: 2009-05-06 16:08+0000\n"
+"Last-Translator: Jimmy Frydkær Jensen <thewolf40@mailme.dk>\n"
+"Language-Team: Danish <da@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2010-03-03 21:28+0000\n"
+"X-Generator: Launchpad (build Unknown)\n"
+
+#: pysum.py:95 pysum.py:342
+msgid "Can't open the file:"
+msgstr "Kan ikke åbne filen:"
+
+#: pysum.py:249
+msgid "Select a file"
+msgstr "Vælg en fil"
+
+#: pysum.py:263
+msgid "Error"
+msgstr "Fejl"
+
+#: pysum.py:276
+msgid "A pygtk application for create and verify md5 and other checksum"
+msgstr "Et pygtk-program til at oprette og verificere md5 og andre check-summer"
+
+#: pysum.py:340
+msgid "Please choose a file"
+msgstr "Vælg venligst en fil"
+
+#: pysum.glade.h:1
+msgid "Checksum: "
+msgstr "Checksum: "
+
+#: pysum.glade.h:2
+msgid "File: "
+msgstr "Fil: "
+
+#: pysum.glade.h:3
+msgid "Generate"
+msgstr "Generér"
+
+#: pysum.glade.h:4
+msgid "Hash type: "
+msgstr "Hash-type: "
+
+#: pysum.glade.h:5
+msgid "_About"
+msgstr "_Om"
+
+#: pysum.glade.h:6
+msgid "_File"
+msgstr "_Fil"
+
+#: pysum.glade.h:7
+msgid "_Help"
+msgstr "_Hjælp"
+
+#~ msgid "pySum"
+#~ msgstr "pySum"

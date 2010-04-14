@@ -1,0 +1,67 @@
+# Spanish translations for pysum package.
+# Copyright (C) 2009 THE pysum'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the pysum package.
+# Daniel Fuentes B. <dbfuentes@gmail.com>, 2009.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: pysum\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-03-07 10:38-0300\n"
+"PO-Revision-Date: 2009-02-13 18:43-0300\n"
+"Last-Translator: Daniel Fuentes Barría <dbfuentes@gmail.com>\n"
+"Language-Team: Spanish\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: pysum.py:95 pysum.py:342
+msgid "Can't open the file:"
+msgstr "No se puede abrir el archivo:"
+
+#: pysum.py:249
+msgid "Select a file"
+msgstr "Seleccione un archivo"
+
+#: pysum.py:263
+msgid "Error"
+msgstr "Error"
+
+#: pysum.py:276
+msgid "A pygtk application for create and verify md5 and other checksum"
+msgstr "Una aplicación para obtener y verificar hash md5 y otras sumas de verificación"
+
+#: pysum.py:340
+msgid "Please choose a file"
+msgstr "Por favor seleccione un archivo"
+
+#: pysum.glade.h:1
+msgid "Checksum: "
+msgstr "Checksum: "
+
+#: pysum.glade.h:2
+msgid "File: "
+msgstr "Archivo: "
+
+#: pysum.glade.h:3
+msgid "Generate"
+msgstr "Generar"
+
+#: pysum.glade.h:4
+msgid "Hash type: "
+msgstr "Tipo de Hash: "
+
+#: pysum.glade.h:5
+msgid "_About"
+msgstr "Acerca _de"
+
+#: pysum.glade.h:6
+msgid "_File"
+msgstr "_Archivo"
+
+#: pysum.glade.h:7
+msgid "_Help"
+msgstr "Ay_uda"
+
+#~ msgid "pySum"
+#~ msgstr "pySum"

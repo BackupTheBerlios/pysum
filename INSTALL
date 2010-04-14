@@ -1,0 +1,55 @@
+Installation Instructions
+=========================
+
+----------------
+ Debian package
+----------------
+
+if you use debian, ubuntu, or some other similar distribution, install pysum
+using the .deb package (available on the project page
+https://developer.berlios.de/project/showfiles.php?group_id=9993)
+
+1. Download your chosen .deb package via wget or another method
+
+2. From the terminal type sudo dpkg -i packagename.deb (replacing packagename with the name of the package)
+
+Note: You can install .debs using a gui (graphical interface). Gdebi is
+installed and does the work for you. It even checks if any dependencies are
+missing!
+
+
+----------------
+ Manual install
+----------------
+
+== Depends ==
+
+pysum depends on the Python runtime and associated libraries.
+
+Python (>= 2.5) : http://www.python.org
+PyGTK (>= 2.8) : http://www.pygtk.org
+
+== Run Source code (without installing) ==
+
+You can find the source code of pysum in /src. To run (without installing), in
+a terminal use the following syntax:
+
+$ cd src
+$ python pysum.py
+
+== Install ==
+
+Copy the files in /src to any directory you like, (for example in your home, in
+usr/share, etc.)
+
+Note: To work the pysum.glade file must be in the same directory as pysum.py
+OR else you have to edit the value of resources_dir specifying the location of
+the directory (aprox. lines 22-26 in pysum.py)
+
+
+--------------
+ Translations
+--------------
+
+Check the /po directory for instructions
+

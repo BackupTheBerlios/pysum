@@ -1,0 +1,33 @@
+PYSUM(1)
+=========
+Daniel Fuentes B. <dbfuentes@gmail.com>
+
+NAME
+----
+pysum - A simple pygtk application for create md5 and other checksum
+
+SYNOPSIS
+--------
+*pysum*
+
+DESCRIPCION
+-----------
+pysum is a simple pygtk application for create and verify md5,
+sha-1, sha-256 and other checksum. Written in python using PyGTK
+and it's licensed under the GPL.
+
+BUGS
+----
+You can enter a bug into the Berlios Bug Tracking System, this
+system can be found on
+https://developer.berlios.de/mantis/set_project.php?project_id=9993
+
+AUTHOR
+------
+Written by Daniel Fuentes B. <dbfuentes@gmail.com>
+
+COPYING
+-------
+Copyright (C) 2008-2010 Daniel Fuentes B. Free use of this software is
+granted under the terms of the GNU General Public License (GPL).
+

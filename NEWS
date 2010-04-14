@@ -1,0 +1,19 @@
+2010-03-07  Daniel Fuentes B. <dbfuentes@gmail.com>
+
+	* Version 0.4 Released
+	* added support for CRC32
+	* added support for Sha224 and sha384
+
+2010-03-03  Daniel Fuentes B. <dbfuentes@gmail.com>
+
+	* Version 0.3 Released
+	* added support for sha256 and sha512
+
+2009-02-13  Daniel Fuentes B. <dbfuentes@gmail.com>
+
+	* Version 0.2 Released
+	* added support for sha1
+
+2008-09-06  Daniel Fuentes B. <dbfuentes@gmail.com>
+
+	* Version 0.1 Released

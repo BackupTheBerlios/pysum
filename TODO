@@ -1,0 +1,6 @@
+ToDo List:
+- Add support to sha-1 (done)
+- Add support to crc32
+- Create a window to compare hashes
+- Read MD5 sums from a File and check them
+- Read SHA1 sums from a File and check them

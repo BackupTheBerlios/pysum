@@ -1,0 +1,26 @@
+--------------
+ Translations
+--------------
+
+In Launchpad you can find translations for more languages.
+
+The translations that exist in this directory is obtained from launchpad,
+for details of translators visit: https://translations.launchpad.net/pysum
+
+Translations submitted in Launchpad licensed using the BSD licence, see:
+https://help.launchpad.net/Translations/LicensingFAQ
+
+
+----------------------
+ Install Translations
+----------------------
+
+The program use the default directory for translations (usually 
+/usr/share/locale/ on a GNU/Linux, but on Solaris it is /usr/lib/locale)
+
+You can translate the *.pot or *.po file (using poEdit, KBabel, gtranslator or
+launchpad) and next generate a *.mo file. You should copy the *.mo file into
+your locate directory (on GNU/Linux: localedir/language/LC_MESSAGES/pysum.mo).
+For example, if you use a translation into Spanish, copy the *.mo file to:
+/usr/share/locale/es/LC_MESSAGES/pysum.mo 
+
