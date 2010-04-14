@@ -1,3 +1,7 @@
+2010-04-14  Daniel Fuentes B. <dbfuentes@gmail.com>
+
+	* Svn repository migrating to mercurial (hg)
+
 2010-03-07  Daniel Fuentes B. <dbfuentes@gmail.com>
 
 	* Version 0.4 Released
@@ -17,3 +21,4 @@
 2008-09-06  Daniel Fuentes B. <dbfuentes@gmail.com>
 
 	* Version 0.1 Released
+	* added support for md5

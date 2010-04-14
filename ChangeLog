@@ -1,5 +1,10 @@
 2010-04-14  Daniel Fuentes B. <dbfuentes@gmail.com>
 
+	* src/pysum.glade: add a tab (gtk-notebook) for compare hashes
+	* src/pysum.py: partially added support to compare hashes
+
+2010-04-14  Daniel Fuentes B. <dbfuentes@gmail.com>
+
 	* svn repository migrating to mercurial
 
 2010-03-07  Daniel Fuentes B. <dbfuentes@gmail.com>
