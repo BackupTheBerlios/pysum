@@ -37,34 +37,6 @@
               </widget>
             </child>
             <child>
-              <widget class="GtkMenuItem" id="menuitem2">
-                <property name="visible">True</property>
-                <property name="label" translatable="yes">_View</property>
-                <property name="use_underline">True</property>
-                <child>
-                  <widget class="GtkMenu" id="menu2">
-                    <property name="visible">True</property>
-                    <child>
-                      <widget class="GtkMenuItem" id="menugenerate">
-                        <property name="visible">True</property>
-                        <property name="label" translatable="yes">Generate</property>
-                        <property name="use_underline">True</property>
-                        <signal name="activate" handler="on_menugenerate_activate"/>
-                      </widget>
-                    </child>
-                    <child>
-                      <widget class="GtkMenuItem" id="menucompare">
-                        <property name="visible">True</property>
-                        <property name="label" translatable="yes">Compare</property>
-                        <property name="use_underline">True</property>
-                        <signal name="activate" handler="on_menucompare_activate"/>
-                      </widget>
-                    </child>
-                  </widget>
-                </child>
-              </widget>
-            </child>
-            <child>
               <widget class="GtkMenuItem" id="menuitem3">
                 <property name="visible">True</property>
                 <property name="label" translatable="yes">_Help</property>
@@ -356,6 +328,7 @@ sha512</property>
                         <property name="right_attach">2</property>
                         <property name="top_attach">2</property>
                         <property name="bottom_attach">3</property>
+                        <property name="y_options">GTK_EXPAND</property>
                       </packing>
                     </child>
                     <child>

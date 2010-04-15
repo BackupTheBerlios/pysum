@@ -6,16 +6,17 @@ Installation Instructions
 ----------------
 
 if you use debian, ubuntu, or some other similar distribution, install pysum
-using the .deb package (available on the project page
+using the *.deb package (available on the project page
 https://developer.berlios.de/project/showfiles.php?group_id=9993)
 
-1. Download your chosen .deb package via wget or another method
+1.- Download your chosen .deb package via wget or another method
 
-2. From the terminal type sudo dpkg -i packagename.deb (replacing packagename with the name of the package)
+2.- From the terminal type sudo dpkg -i packagename.deb
+    (replacing packagename with the name of the package)
 
-Note: You can install .debs using a gui (graphical interface). Gdebi is
-installed and does the work for you. It even checks if any dependencies are
-missing!
+Note: You can install *.deb file using a gui (graphical interface). For example
+Gdebi installed and does the work for you. It even checks if any dependencies
+are missing!
 
 
 ----------------
@@ -31,20 +32,40 @@ PyGTK (>= 2.8) : http://www.pygtk.org
 
 == Run Source code (without installing) ==
 
-You can find the source code of pysum in /src. To run (without installing), in
-a terminal use the following syntax:
+You can find the source code of pysum in /src. To run (without installing),
+in a terminal use the following syntax:
 
 $ cd src
 $ python pysum.py
 
-== Install ==
+== Install (manually)==
 
-Copy the files in /src to any directory you like, (for example in your home, in
-usr/share, etc.)
+Copy the files in /src and /img directory to any other directory you like,
+(for example in your home, in /usr/share, etc.)
 
-Note: To work the pysum.glade file must be in the same directory as pysum.py
-OR else you have to edit the value of resources_dir specifying the location of
-the directory (aprox. lines 22-26 in pysum.py)
+
+Note 1:
+-------
+To work the pysum.glade file must be in the same directory as pysum.py
+OR ELSE you have to edit the value of RESOURCES_DIR specifying the location
+of the directory in where the pysum.glade file is found (aprox. lines 22-30
+in /src/pysum.py)
+
+Note 2:
+-------
+The images and icons for the program (pysum.png, pysum.svg,...) must be in
+the /img directory or in the same directory as pysum.py
+
+For example if you put the script in: /home/user/foo/pysum.py and the program
+needs open the image pysum.png, the program will try to open the image in the
+following locations (in order):
+1)  /home/user/foo/img/pysum.png
+2)  /home/user/foo/pysum.png
+3)  /home/user/img/pysum.png
+4)  IMG_DIR value (aprox. lines 22-30 in src/pysum.py)
+
+If you need to establish a different location, please edit the value of IMG_DIR
+specifying the location of the directory (aprox. lines 22-30 in src/pysum.py)
 
 
 --------------
@@ -52,4 +73,3 @@ the directory (aprox. lines 22-26 in pysum.py)
 --------------
 
 Check the /po directory for instructions
-

@@ -23,35 +23,20 @@
 
 # Directory with the files (*.glade)
 RESOURCES_DIR = "/usr/share/pysum"
-# Directory with the img. (icons)
+
+# Directory with the images (icons)
 IMG_DIR = "/usr/share/pysum"
 
 ########### STOP EDIT HERE ############
 
 
-# Informacion del programa que se modifica con cierta frecuencia
-# (para no escribir tanto)
-
-__version__ = "0.5 alpha"
-AUTHOR = "Daniel Fuentes Barría <dbfuentes@gmail.com>"
-WEBSITE = "http://pysum.berlios.de/"
-LICENCE = "This program is free software; you can redistribute \
-it and/or modify it under the terms of the GNU General Public License \
-as published by the Free Software Foundation; either version 2 of the \
-License, or (at your option) any later version.\n\nThis program is \
-distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; \
-without even the implied warranty of MERCHANTABILITY or FITNESS FOR A \
-PARTICULAR PURPOSE. See the GNU General Public License for more details.\
-\n\nYou should have received a copy of the GNU General Public License \
-along with this program; if not, write to the Free Software Foundation, \
-Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA."
-
-# ---------------------------------------------------------------------
+# ===================================================================
 # Importamos los modulos necesarios
 
 import gettext
 import os.path
 from os import pardir
+from os import curdir
 import hashlib
 import zlib
 
@@ -71,13 +56,31 @@ except:
     sys.exit(1)
 
 
+# ===================================================================
+# Informacion del programa que se modifica con cierta frecuencia
+# (para no escribir tanto al sacar nuevas versiones)
+
+__version__ = "0.5 beta1"
+AUTHOR = "Daniel Fuentes Barría <dbfuentes@gmail.com>"
+WEBSITE = "http://pysum.berlios.de/"
+LICENCE = "This program is free software; you can redistribute \
+it and/or modify it under the terms of the GNU General Public License \
+as published by the Free Software Foundation; either version 2 of the \
+License, or (at your option) any later version.\n\nThis program is \
+distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; \
+without even the implied warranty of MERCHANTABILITY or FITNESS FOR A \
+PARTICULAR PURPOSE. See the GNU General Public License for more details.\
+\n\nYou should have received a copy of the GNU General Public License \
+along with this program; if not, write to the Free Software Foundation, \
+Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA."
+
 # Algunas cosas para gettext (i18n / traducciones)
 _ = gettext.gettext
 
 gettext.textdomain("pysum")
 gtk.glade.textdomain("pysum")
 
-
+# ===================================================================
 # Las siguientes Clases/funciones calculan los hash del un archivo.
 # El .read() hay que realizarlo por partes para no llenar la memoria
 
@@ -192,7 +195,7 @@ class MainGui:
     def __init__(self):
         # Le indicamos al programa que archivo XML de glade usar
         # la comprobación es para que funcione el paquete debian
-        if os.path.exists("pysum.glade"):
+        if os.path.exists(os.path.join(os.curdir, "pysum.glade")):
             self.widgets = gtk.glade.XML("pysum.glade")
         else:
             self.widgets = gtk.glade.XML(os.path.join(RESOURCES_DIR,
@@ -225,10 +228,17 @@ class MainGui:
         self.combobox2.set_active(1)
 
     # Similar al .glade, hay que determinar donde esta el icono del programa
-    # primero asumimos que esta en el directorio de las fuentes (trunk/img/)
-        self.icono = os.path.join(os.pardir, "img", "pysum.png")
-        if os.path.exists(self.icono) == False:
-            # si no esta alli, cambiamos la ruta a la definida en IMG_DIR
+        # primero probamos buscar la imagen en ~/src/img/pysum.png
+        if os.path.exists(os.path.join(os.curdir, "img", "pysum.png")):
+            self.icono = os.path.join(os.curdir, "img", "pysum.png")
+        # probamos en ~/src/pysum.png
+        elif os.path.exists(os.path.join(os.curdir, "pysum.png")):
+            self.icono = os.path.join(os.curdir, "pysum.png")
+        # luego probamos si esta en el directorio de las fuentes (~/img/)
+        elif os.path.exists(os.path.join(os.pardir, "img", "pysum.png")):
+            self.icono = os.path.join(os.pardir, "img", "pysum.png")
+        else:
+            # si no fue encontrado, cambiamos a la ruta definida en IMG_DIR
             self.icono = os.path.join(IMG_DIR, "pysum.png")
 
         # Ahora le agregamos el icono a la ventana
@@ -257,17 +267,17 @@ class MainGui:
         file_open.destroy()
         return resultado
 
-    # Ventana generica de error
-    def error(self, message):
-        "Display the error dialog "
-        dialog_error = gtk.MessageDialog(parent=None, flags=0,
-                       buttons=gtk.BUTTONS_OK)
-        dialog_error.set_title(_("Error"))
+    # Ventana generica de para entregar informacion (errores, avisos, etc.)
+    def info(self, message, title="Error"):
+        "Display the info dialog "
+        dialogo = gtk.MessageDialog(parent=None, flags=0,
+                    buttons=gtk.BUTTONS_OK)
+        dialogo.set_title(title)
         label = gtk.Label(message)
-        dialog_error.vbox.pack_start(label, True, True, 0)
+        dialogo.vbox.pack_start(label, True, True, 0)
         label.show()
-        dialog_error.run()
-        dialog_error.destroy()
+        dialogo.run()
+        dialogo.destroy()
 
     # Ventana Acerca de (los creditos).
     def about_info(self, data=None):
@@ -336,9 +346,11 @@ verify md5 and other checksum"))
                 text_buffer.set_text(str(archivo.getcrc32()))
         except:
             if (len(texto_entry1) == 0):
-                self.error(_("Please choose a file"))
+                mensaje = _("Please choose a file")
+                self.info(mensaje, _("Error"))
             else:
-                self.error(_("Can't open the file:") + texto_entry1)
+                mensaje = _("Can't open the file:") + texto_entry1
+                self.info(mensaje, _("Error"))
         # Se muestra el buffer (hash obtenido) en textview
         self.textview1.set_buffer(text_buffer)
 
@@ -354,34 +366,51 @@ verify md5 and other checksum"))
         combobox_selec = valor_combobox(self.combobox2)
         texto_entry2 = self.entry2.get_text()
         archivo = hashfile(texto_entry2)
-        try:
-            if combobox_selec == "md5":
-                resultado_hash = str(archivo.getmd5())
-            elif combobox_selec == "sha1":
-                resultado_hash = str(archivo.getsha1())
-            elif combobox_selec == "sha224":
-                resultado_hash = str(archivo.getsha224())
-            elif combobox_selec == "sha256":
-                resultado_hash = str(archivo.getsha256())
-            elif combobox_selec == "sha384":
-                resultado_hash = str(archivo.getsha384())
-            elif combobox_selec == "sha512":
-                resultado_hash = str(archivo.getsha512())
-            elif combobox_selec == "CRC32":
-                resultado_hash = str(archivo.getcrc32())
-        except:
-            if (len(texto_entry2) == 0):
-                self.error(_("Please choose a file"))
-            else:
-                self.error(_("Can't open the file:") + texto_entry2)
+        # Revisamos si se ha abierto un archivo
+        if (len(texto_entry2) == 0):
+            mensaje = _("Please choose a file")
+            self.info(mensaje, _("Error"))
+            resultado_hash = "none"
+        else:
+            try:
+                if combobox_selec == "md5":
+                    resultado_hash = str(archivo.getmd5())
+                elif combobox_selec == "sha1":
+                    resultado_hash = str(archivo.getsha1())
+                elif combobox_selec == "sha224":
+                    resultado_hash = str(archivo.getsha224())
+                elif combobox_selec == "sha256":
+                    resultado_hash = str(archivo.getsha256())
+                elif combobox_selec == "sha384":
+                    resultado_hash = str(archivo.getsha384())
+                elif combobox_selec == "sha512":
+                    resultado_hash = str(archivo.getsha512())
+                elif combobox_selec == "CRC32":
+                    resultado_hash = str(archivo.getcrc32())
+            except:
+                mensaje = _("Can't open the file:") + texto_entry2
+                self.info(mensaje, _("Error"))
+                resultado_hash = "none"
+
         resultado_hash = resultado_hash.lower()
+
+        # obtenemos el hash esperado
         hash_esperado = str(self.entry3.get_text())
         hash_esperado = hash_esperado.lower()
+        # Al hacer split se pierde el doble, triple o mas espacios (que pueden
+        # haber antes o despues del texto) y luego joint unen los textos
+        hash_esperado = hash_esperado.split()
+        hash_esperado = "".join(hash_esperado)
+        # Comprobamos si el resultado coincide con lo esperado
         if resultado_hash == hash_esperado:
-            self.error(_("%s Checksums are the same" % (combobox_selec)))
+            mensaje = _("%s Checksums are the same") % (combobox_selec)
+            self.info(mensaje, _("Ok"))
+        elif resultado_hash == "none":
+            pass  # Esto es en caso de que no se pueda abrir el archivo
         else:
-            self.error(_("Checksums diferent\nFile: %s\nExpected: %s" % (
-                resultado_hash, hash_esperado)))
+            mensaje = (_("Checksums are diferent\nFile: ") + resultado_hash +
+                    _("\nExpected: ") + hash_esperado)
+            self.info(mensaje, _("Warning"))
 
 if __name__ == "__main__":
     MainGui()

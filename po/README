@@ -2,13 +2,17 @@
  Translations
 --------------
 
-In Launchpad you can find translations for more languages.
+This project uses Launchpad for translations. In Launchpad you can find
+translations for more languages.
 
 The translations that exist in this directory is obtained from launchpad,
 for details of translators visit: https://translations.launchpad.net/pysum
 
-Translations submitted in Launchpad licensed using the BSD licence, see:
-https://help.launchpad.net/Translations/LicensingFAQ
+Translations submitted in Launchpad licensed using the simplified BSD licence,
+see: https://help.launchpad.net/Translations/LicensingFAQ
+
+This project and its developers are not responsible for the content of the
+translations
 
 
 ----------------------
@@ -24,3 +28,16 @@ your locate directory (on GNU/Linux: localedir/language/LC_MESSAGES/pysum.mo).
 For example, if you use a translation into Spanish, copy the *.mo file to:
 /usr/share/locale/es/LC_MESSAGES/pysum.mo 
 
+
+----------------
+ help translate
+----------------
+
+If you want to help translate pySum, please visit:
+https://translations.launchpad.net/pysum
+
+Login with your account (or sign-up) and begins to translate. Permits for the
+project are set Open (anyone can submit translations)
+
+If you have any questions, please read
+https://help.launchpad.net/Translations/StartingToTranslate

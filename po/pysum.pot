@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-03-07 10:38-0300\n"
+"POT-Creation-Date: 2010-04-15 19:02-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,24 +16,49 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: pysum.py:95 pysum.py:342
+#: pysum.py:95 pysum.py:352 pysum.py:391
 msgid "Can't open the file:"
 msgstr ""
 
-#: pysum.py:249
+#: pysum.py:261
 msgid "Select a file"
 msgstr ""
 
-#: pysum.py:263
-msgid "Error"
-msgstr ""
-
-#: pysum.py:276
+#: pysum.py:288
 msgid "A pygtk application for create and verify md5 and other checksum"
 msgstr ""
 
-#: pysum.py:340
+#: pysum.py:349 pysum.py:371
 msgid "Please choose a file"
+msgstr ""
+
+#: pysum.py:350 pysum.py:353 pysum.py:372 pysum.py:392
+msgid "Error"
+msgstr ""
+
+#: pysum.py:406
+#, python-format
+msgid "%s Checksums are the same"
+msgstr ""
+
+#: pysum.py:407
+msgid "Ok"
+msgstr ""
+
+#: pysum.py:411
+msgid ""
+"Checksums are diferent\n"
+"File: "
+msgstr ""
+
+#: pysum.py:412
+msgid ""
+"\n"
+"Expected: "
+msgstr ""
+
+#: pysum.py:413
+msgid "Warning"
 msgstr ""
 
 #: pysum.glade.h:1
@@ -41,25 +66,29 @@ msgid "Checksum: "
 msgstr ""
 
 #: pysum.glade.h:2
-msgid "File: "
+msgid "Compare"
 msgstr ""
 
 #: pysum.glade.h:3
-msgid "Generate"
+msgid "Expected value: "
 msgstr ""
 
 #: pysum.glade.h:4
-msgid "Hash type: "
+msgid "File: "
 msgstr ""
 
 #: pysum.glade.h:5
-msgid "_About"
+msgid "Generate"
 msgstr ""
 
 #: pysum.glade.h:6
-msgid "_File"
+msgid "Hash type: "
 msgstr ""
 
 #: pysum.glade.h:7
+msgid "_File"
+msgstr ""
+
+#: pysum.glade.h:8
 msgid "_Help"
 msgstr ""
