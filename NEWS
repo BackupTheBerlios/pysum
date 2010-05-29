@@ -1,3 +1,9 @@
+2010-05-29  Daniel Fuentes B. <dbfuentes@gmail.com>
+
+	* Version 0.5 Released
+	* add a tab for compare hashes
+	* update translations and add new translations
+
 2010-04-14  Daniel Fuentes B. <dbfuentes@gmail.com>
 
 	* Svn repository migrating to mercurial (hg)

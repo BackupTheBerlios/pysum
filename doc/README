@@ -5,9 +5,10 @@ Manpage
 Generate:
 ----------
 
-xmlto man manpage.xml
+$ xmlto man manpage.xml
 
 or
 
-xsltproc --nonet /usr/share/xml/docbook/stylesheet/nwalsh/manpages/docbook.xsl manpage.xml
+$ xsltproc --nonet /usr/share/xml/docbook/stylesheet/nwalsh/manpages/docbook.xsl manpage.xml
 
+Enjoy.

@@ -1,5 +1,6 @@
 pysum - A pygtk application for create and verify md5 and other checksum
--------------------------------------------------------------------------
+------------------------------------------------------------------------
+
 
 pysum depends on the Python runtime and associated libraries.
 
@@ -7,10 +8,16 @@ Python (>= 2.5) : http://www.python.org
 PyGTK (>= 2.8) : http://www.pygtk.org
 
 
+== Licence ==
+
+It's licensed under the GNU General Public License version 2, or
+(at your option) any later version. See the COPYING file for details.
+
+
 == To run Source code (without installing) ==
 
-You can find the source code of pysum in /src. To run (without installing), in
-a terminal use the following syntax:
+You can find the source code of pysum in /src. To run (without
+installing), in a terminal use the following syntax:
 
 $ cd src
 $ python pysum.py
@@ -18,14 +25,16 @@ $ python pysum.py
 
 == To install ==
 
-If you use debian, ubuntu, or some other similar, please using the .deb package
-to install pySum
+If you use debian, ubuntu, or some other similar, please using
+the .deb package to install pySum.
 
-For more detailed instructions (And generic installation instructions), please
-see the INSTALL file
+For more detailed instructions (and generic installation
+instructions), please see the INSTALL file.
 
 
 == Translations (i18n/gettext) ==
 
-please view the instructions in the INSTALL file and /po directory
+Please view the instructions in the INSTALL file and /po directory
 
+If you want to help translate pySum, please visit:
+https://translations.launchpad.net/pysum
