@@ -34,7 +34,18 @@ instructions), please see the INSTALL file.
 
 == Translations (i18n/gettext) ==
 
-Please view the instructions in the INSTALL file and /po directory
+Please view the instructions in the INSTALL file
+
+
+== help translate ==
 
 If you want to help translate pySum, please visit:
 https://translations.launchpad.net/pysum
+
+Login with your account (or sign-up) and begins to translate.
+Permits for the project are set Open (anyone can submit
+translations)
+
+If you have any questions, please read
+https://help.launchpad.net/Translations/StartingToTranslate
+
