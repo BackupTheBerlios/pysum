@@ -34,11 +34,12 @@ IMG_DIR = "/usr/share/pysum"
 # Importamos los modulos necesarios
 
 import gettext
+import hashlib
+import zlib
 import os.path
 from os import pardir
 from os import curdir
-import hashlib
-import zlib
+import threading
 
 # importamos los modulos para la parte grafica
 try:
@@ -51,16 +52,16 @@ except:
 try:
     import gtk
     import gtk.glade
+    import gobject
 except:
     print "You need to install pyGTK or GTKv2 or set your PYTHONPATH correctly"
     sys.exit(1)
-
 
 # ===================================================================
 # Informacion del programa que se modifica con cierta frecuencia
 # (para no escribir tanto al sacar nuevas versiones)
 
-__version__ = "0.5"
+__version__ = "0.6 alpha"
 AUTHOR = "Daniel Fuentes Barría <dbfuentes@gmail.com>"
 WEBSITE = "http://pysum.berlios.de/"
 LICENCE = "This program is free software; you can redistribute \
@@ -84,95 +85,99 @@ gtk.glade.textdomain("pysum")
 # Las siguientes Clases/funciones calculan los hash del un archivo.
 # El .read() hay que realizarlo por partes para no llenar la memoria
 
+# Nota: hay 2 modulos para CRC32 en python: de zlib y de binascii
+# de las dos anteriores, zlib es más rapida (por lo que se usa esa)
 
-class hashfile():
-    """Clase para calcular los diferentes hashs"""
 
-    def __init__(self, filename):
-        try:
-            self.archivo = open(filename, "rb")
-        except:
-            print _("Can't open the file:"), filename
+class GetHash(threading.Thread):
+    """Clase para calcular distintos hashs mediante threads"""
 
-    def getmd5(self):
-    # Definimos una funcion para obtener el hash md5 de los archivos
-        suma = hashlib.md5()
-        while True:
-            data = self.archivo.read(10240)
-            if not data:
-                break
-            suma.update(data)
-        self.archivo.close()
-        return suma.hexdigest()
+    def __init__(self, filename, hashtype, text_buffer, hash_esperado=None, label=None):
+        super(GetHash, self).__init__()
+        # guardamos algunos valores (que despues usamos)
+        self.filename = filename
+        self.hashtype = hashtype
+        self.text_buffer = text_buffer
+        # la etiqueta y hash_esperado se usan en la comparacion:
+        self.hash_esperado = hash_esperado
+        self.label = label
+        self.quit = False
 
-    def getsha1(self):
-    # Definimos una funcion para obtener el hash sha1 de los archivos
-        suma = hashlib.sha1()
-        while True:
-            data = self.archivo.read(10240)
-            if not data:
-                break
-            suma.update(data)
-        self.archivo.close()
-        return suma.hexdigest()
+    def update_textbuffer(self, resultado):
+        # Nota: resultado es una cadena de texto con el hash obtenido
+        self.text_buffer.set_text(resultado)
+        return self.text_buffer
 
-    def getsha224(self):
-        suma = hashlib.sha224()
-        while True:
-            data = self.archivo.read(10240)
-            if not data:
-                break
-            suma.update(data)
-        self.archivo.close()
-        return suma.hexdigest()
+    def update_label(self, mensaje):
+        # actualizar etiqueta (que se usa en la ventana de la comparacion)
+        self.label.set_text(mensaje)
+        return self.text_buffer
 
-    def getsha256(self):
-        suma = hashlib.sha256()
-        while True:
-            data = self.archivo.read(10240)
-            if not data:
-                break
-            suma.update(data)
-        self.archivo.close()
-        return suma.hexdigest()
-
-    def getsha384(self):
-        suma = hashlib.sha384()
-        while True:
-            data = self.archivo.read(10240)
-            if not data:
-                break
-            suma.update(data)
-        self.archivo.close()
-        return suma.hexdigest()
-
-    def getsha512(self):
-        suma = hashlib.sha512()
-        while True:
-            data = self.archivo.read(10240)
-            if not data:
-                break
-            suma.update(data)
-        self.archivo.close()
-        return suma.hexdigest()
-
-    def getcrc32(self):
-        # hay dos crc32 en python, la de zlib y la de binascii
-        # de las dos anteriores, zlib es más rapida (por lo que se usa esa)
-        suma = 0
-        while True:
-            data = self.archivo.read(10240)
-            if not data:
-                break
-            suma = zlib.crc32(data, suma)
-        self.archivo.close()
-        # por defecto python 2.x muestra un valor entre :
-        # -2147483648, 2147483648 (32-bit) y 0, 4294967296 (64-bit)
-        # Se arregla con el sig. if: (Ver http://bugs.python.org/issue1202)
-        if suma < 0:
-            #suma = (long(suma) + 4294967296L)
-            suma = suma & 0xffffffffL
-        return "%08x" % suma
+    def run(self):
+        # metodo que se llama cuando se hace un start() sobre un thread
+        while not self.quit:
+            # Intenta leer el archivo
+            try:
+                self.archivo = open(self.filename, "rb")
+            except:
+                self.archivo = None
+                print _("Can't open the file:"), self.filename
+            # Dependiendo del tipo de hash, crea la suma adecuada
+            if self.hashtype == "md5":
+                suma = hashlib.md5()
+            elif self.hashtype == "sha1":
+                suma = hashlib.sha1()
+            elif self.hashtype == "sha224":
+                suma = hashlib.sha224()
+            elif self.hashtype == "sha256":
+                suma = hashlib.sha256()
+            elif self.hashtype == "sha384":
+                suma = hashlib.sha384()
+            elif self.hashtype == "sha512":
+                suma = hashlib.sha512()
+            elif self.hashtype == "CRC32":
+                # caso especial, no se usa hashlib sino zlib
+                suma = 0
+            # calculamos el hash (crc32 es un caso especial)
+            if self.hashtype == "CRC32":
+                while True:
+                    data = self.archivo.read(10240)
+                    if not data:
+                        break
+                    suma = zlib.crc32(data, suma)
+                self.archivo.close()
+                # python 2.x muestra un valor entre : -2147483648,
+                # 2147483648 (32-bit) y 0, 4294967296 (64-bit)
+                # arreglar con este if (http://bugs.python.org/issue1202)
+                if suma < 0:
+                    #suma = (long(suma) + 4294967296L)
+                    suma = suma & 0xffffffffL
+                # Obtener cadena de texto con el hash
+                resultado = "%08x" % (suma)
+                # Actualizar ventana (textbuffer)
+                gobject.idle_add(self.update_textbuffer, resultado)
+            # Calculamos el hash para los demas casos
+            else:
+                while True:
+                    data = self.archivo.read(10240)
+                    if not data:
+                        break
+                    suma.update(data)
+                self.archivo.close()
+                # Obtener cadena de texto con el hash
+                resultado = str(suma.hexdigest())
+                # Actualizar ventana (textbuffer)
+                gobject.idle_add(self.update_textbuffer, resultado)
+            # comparamos el has hesperado con el obtenido
+            if self.hash_esperado != None:
+                if resultado == self.hash_esperado:
+                    mensaje = _("%s checksums are the same") % (self.hashtype)
+                else:
+                    mensaje = (_("Checksums are diferent\nFile: ") + resultado +
+                    _("\nExpected: ") + self.hash_esperado)
+                gobject.idle_add(self.update_label, mensaje)
+            # Terminar la ejecucion del run()
+            self.quit = True
 
 
 # Función que obtiene el texto de la opcion seleccionada en un ComboBox
@@ -248,8 +253,9 @@ class MainGui:
         except:
             print "Error: no se puede cargar el icono: %s" % (self.icono)
 
-    # De aqui en adelante comienza las acciones propias del programa
-    # Como las ventanas especiales y las acciones a realizar
+# -------------------------------------------------------------------
+# En adelante comienza las ventanas y acciones propias del programa
+# -------------------------------------------------------------------
 
     # Funcion para abrir archivos (dialogo abrir archivo)
     def file_browse(self):
@@ -305,15 +311,30 @@ verify md5 and other checksum"))
         about.run()
         about.destroy()
 
-# Declaramos las acciones a realizar (menus, botones, etc.):
+    # Ventana que entrega la comparacion dentre hashs)
+    def compare(self, label, title="Result"):
+        "Display the dialog "
+        dialogo = gtk.MessageDialog(parent=None, flags=0,
+                    buttons=gtk.BUTTONS_OK)
+        dialogo.set_title(title)
+        label = label
+        dialogo.vbox.pack_start(label, True, True, 0)
+        label.show()
+        dialogo.run()
+        dialogo.destroy()
+
+# -------------------------------------------------------------------
+# Declaramos las acciones a realizar (por los menus, botones, etc.):
+# -------------------------------------------------------------------
 
     # Definimos las acciones de los menus #
     def on_about1_activate(self, widget):
         "Open the About windows"
         self.about_info()
 
-    # --------------------------------------------------------------------
+    # ---------------------------------------------------------------
     # Pestaña que obtiene el hash de un archivo
+    # ---------------------------------------------------------------
 
     def on_buttonopen1_clicked(self, widget):  # Boton abrir 1
         "Called when the user wants to open a file"
@@ -322,28 +343,42 @@ verify md5 and other checksum"))
 
     def on_buttonok1_clicked(self, widget):  # Boton ok para calcular hash
         "This button generate the hash"
-        text_buffer = gtk.TextBuffer()
-        # Comprobamos la opcion elegida en el ComboBox
+        # Comprobamos la opcion elegida en el ComboBox (tipo de hash)
         combobox_selec = valor_combobox(self.combobox1)
-        # Se obtiene la ruta del archivo desde la entrada y crea un buffer
+        # Se obtiene la ruta del archivo desde la entrada
         texto_entry1 = self.entry1.get_text()
-        archivo = hashfile(texto_entry1)
+        # Se crea un buffer de texto (para el resultado del hash)
+        text_buffer = gtk.TextBuffer()
         # Se intenta obtener el hash, dependiendo de la opcion escogida
         try:
             if combobox_selec == "md5":
-                text_buffer.set_text(str(archivo.getmd5()))
+                hashtype = "md5"
+                hilo = GetHash(texto_entry1, hashtype, text_buffer)
+                hilo.start()
             elif combobox_selec == "sha1":
-                text_buffer.set_text(str(archivo.getsha1()))
+                hashtype = "sha1"
+                hilo = GetHash(texto_entry1, hashtype, text_buffer)
+                hilo.start()
             elif combobox_selec == "sha224":
-                text_buffer.set_text(str(archivo.getsha224()))
+                hashtype = "sha224"
+                hilo = GetHash(texto_entry1, hashtype, text_buffer)
+                hilo.start()
             elif combobox_selec == "sha256":
-                text_buffer.set_text(str(archivo.getsha256()))
+                hashtype = "sha256"
+                hilo = GetHash(texto_entry1, hashtype, text_buffer)
+                hilo.start()
             elif combobox_selec == "sha384":
-                text_buffer.set_text(str(archivo.getsha384()))
+                hashtype = "sha384"
+                hilo = GetHash(texto_entry1, hashtype, text_buffer)
+                hilo.start()
             elif combobox_selec == "sha512":
-                text_buffer.set_text(str(archivo.getsha512()))
+                hashtype = "sha512"
+                hilo = GetHash(texto_entry1, hashtype, text_buffer)
+                hilo.start()
             elif combobox_selec == "CRC32":
-                text_buffer.set_text(str(archivo.getcrc32()))
+                hashtype = "CRC32"
+                hilo = GetHash(texto_entry1, hashtype, text_buffer)
+                hilo.start()
         except:
             if (len(texto_entry1) == 0):
                 mensaje = _("Please choose a file")
@@ -354,8 +389,9 @@ verify md5 and other checksum"))
         # Se muestra el buffer (hash obtenido) en textview
         self.textview1.set_buffer(text_buffer)
 
-    # --------------------------------------------------------------------
+    # ---------------------------------------------------------------
     # Pestaña que compara el hash de un archivo con un valor experado
+    # ---------------------------------------------------------------
 
     def on_buttonopen2_clicked(self, widget):  # Boton abrir 2
         "Called when the user wants to open a file"
@@ -363,9 +399,22 @@ verify md5 and other checksum"))
         self.entry2.set_text(ruta_archivo)
 
     def on_buttonok2_clicked(self, widget):
-        combobox_selec = valor_combobox(self.combobox2)
+        # Obtenemos el texto del hash esperado (del entry3)
+        hash_esperado = str(self.entry3.get_text())
+        hash_esperado = hash_esperado.lower()
+        # Al hacer split se pierde el doble, triple o mas espacios (que pueden
+        # haber antes o despues del texto) y luego joint unen los textos
+        hash_esperado = hash_esperado.split()
+        hash_esperado = "".join(hash_esperado)
+
+        # Ahora obtenemos el nombre del archivo y tipo de hash
         texto_entry2 = self.entry2.get_text()
-        archivo = hashfile(texto_entry2)
+        combobox_selec = valor_combobox(self.combobox2)
+
+        # iniciamos un buffer de texto y una etiqueta
+        text_buffer = gtk.TextBuffer()
+        label = gtk.Label()
+
         # Revisamos si se ha abierto un archivo
         if (len(texto_entry2) == 0):
             mensaje = _("Please choose a file")
@@ -374,44 +423,43 @@ verify md5 and other checksum"))
         else:
             try:
                 if combobox_selec == "md5":
-                    resultado_hash = str(archivo.getmd5())
+                    hashtype = "md5"
+                    hilo = GetHash(texto_entry2, hashtype, text_buffer, hash_esperado, label)
+                    hilo.start()
                 elif combobox_selec == "sha1":
-                    resultado_hash = str(archivo.getsha1())
+                    hashtype = "sha1"
+                    hilo = GetHash(texto_entry2, hashtype, text_buffer, hash_esperado, label)
+                    hilo.start()
                 elif combobox_selec == "sha224":
-                    resultado_hash = str(archivo.getsha224())
+                    hashtype = "sha224"
+                    hilo = GetHash(texto_entry2, hashtype, text_buffer, hash_esperado, label)
+                    hilo.start()
                 elif combobox_selec == "sha256":
-                    resultado_hash = str(archivo.getsha256())
+                    hashtype = "sha256"
+                    hilo = GetHash(texto_entry2, hashtype, text_buffer, hash_esperado, label)
+                    hilo.start()
                 elif combobox_selec == "sha384":
-                    resultado_hash = str(archivo.getsha384())
+                    hashtype = "sha384"
+                    hilo = GetHash(texto_entry2, hashtype, text_buffer, hash_esperado, label)
+                    hilo.start()
                 elif combobox_selec == "sha512":
-                    resultado_hash = str(archivo.getsha512())
+                    hashtype = "sha512"
+                    hilo = GetHash(texto_entry2, hashtype, text_buffer, hash_esperado, label)
+                    hilo.start()
                 elif combobox_selec == "CRC32":
-                    resultado_hash = str(archivo.getcrc32())
+                    hashtype = "CRC32"
+                    hilo = GetHash(texto_entry1, hashtype, text_buffer, hash_esperado, label)
+                    hilo.start()
             except:
                 mensaje = _("Can't open the file:") + texto_entry2
                 self.info(mensaje, _("Error"))
-                resultado_hash = "none"
 
-        resultado_hash = resultado_hash.lower()
-
-        # obtenemos el hash esperado
-        hash_esperado = str(self.entry3.get_text())
-        hash_esperado = hash_esperado.lower()
-        # Al hacer split se pierde el doble, triple o mas espacios (que pueden
-        # haber antes o despues del texto) y luego joint unen los textos
-        hash_esperado = hash_esperado.split()
-        hash_esperado = "".join(hash_esperado)
         # Comprobamos si el resultado coincide con lo esperado
-        if resultado_hash == hash_esperado:
-            mensaje = _("%s Checksums are the same") % (combobox_selec)
-            self.info(mensaje, _("Ok"))
-        elif resultado_hash == "none":
-            pass  # Esto es en caso de que no se pueda abrir el archivo
-        else:
-            mensaje = (_("Checksums are diferent\nFile: ") + resultado_hash +
-                    _("\nExpected: ") + hash_esperado)
-            self.info(mensaje, _("Warning"))
+        # crear una ventana que entrege el resultado de la comparacion
+        self.compare(label)
 
 if __name__ == "__main__":
+    # iniciar los threads (antes de la funcion/clase principal)
+    gobject.threads_init()
     MainGui()
     gtk.main()
