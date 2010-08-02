@@ -1,3 +1,7 @@
+2010-08-02  Daniel Fuentes B. <dbfuentes@gmail.com>
+
+	* Code cleanup
+
 2010-08-01  Daniel Fuentes B. <dbfuentes@gmail.com>
 
 	* src/pysum.py: Add support for threads

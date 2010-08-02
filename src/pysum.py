@@ -135,11 +135,11 @@ class GetHash(threading.Thread):
                 suma = hashlib.sha384()
             elif self.hashtype == "sha512":
                 suma = hashlib.sha512()
-            elif self.hashtype == "CRC32":
+            elif self.hashtype == "crc32":
                 # caso especial, no se usa hashlib sino zlib
                 suma = 0
             # calculamos el hash (crc32 es un caso especial)
-            if self.hashtype == "CRC32":
+            if self.hashtype == "crc32":
                 while True:
                     data = self.archivo.read(10240)
                     if not data:
@@ -350,39 +350,28 @@ verify md5 and other checksum"))
         # Se crea un buffer de texto (para el resultado del hash)
         text_buffer = gtk.TextBuffer()
         # Se intenta obtener el hash, dependiendo de la opcion escogida
-        try:
-            if combobox_selec == "md5":
-                hashtype = "md5"
+        if (len(texto_entry1) == 0):  # No se especifica archivo
+            mensaje = _("Please choose a file")
+            self.info(mensaje, _("Error"))
+        else:
+            # Comprobar si el archivo existe:
+            if os.path.exists(texto_entry1):
+                if combobox_selec == "md5":
+                    hashtype = "md5"
+                elif combobox_selec == "sha1":
+                    hashtype = "sha1"
+                elif combobox_selec == "sha224":
+                    hashtype = "sha224"
+                elif combobox_selec == "sha256":
+                    hashtype = "sha256"
+                elif combobox_selec == "sha384":
+                    hashtype = "sha384"
+                elif combobox_selec == "sha512":
+                    hashtype = "sha512"
+                elif combobox_selec == "crc32":
+                    hashtype = "crc32"
                 hilo = GetHash(texto_entry1, hashtype, text_buffer)
                 hilo.start()
-            elif combobox_selec == "sha1":
-                hashtype = "sha1"
-                hilo = GetHash(texto_entry1, hashtype, text_buffer)
-                hilo.start()
-            elif combobox_selec == "sha224":
-                hashtype = "sha224"
-                hilo = GetHash(texto_entry1, hashtype, text_buffer)
-                hilo.start()
-            elif combobox_selec == "sha256":
-                hashtype = "sha256"
-                hilo = GetHash(texto_entry1, hashtype, text_buffer)
-                hilo.start()
-            elif combobox_selec == "sha384":
-                hashtype = "sha384"
-                hilo = GetHash(texto_entry1, hashtype, text_buffer)
-                hilo.start()
-            elif combobox_selec == "sha512":
-                hashtype = "sha512"
-                hilo = GetHash(texto_entry1, hashtype, text_buffer)
-                hilo.start()
-            elif combobox_selec == "CRC32":
-                hashtype = "CRC32"
-                hilo = GetHash(texto_entry1, hashtype, text_buffer)
-                hilo.start()
-        except:
-            if (len(texto_entry1) == 0):
-                mensaje = _("Please choose a file")
-                self.info(mensaje, _("Error"))
             else:
                 mensaje = _("Can't open the file:") + texto_entry1
                 self.info(mensaje, _("Error"))
@@ -446,8 +435,8 @@ verify md5 and other checksum"))
                     hashtype = "sha512"
                     hilo = GetHash(texto_entry2, hashtype, text_buffer, hash_esperado, label)
                     hilo.start()
-                elif combobox_selec == "CRC32":
-                    hashtype = "CRC32"
+                elif combobox_selec == "crc32":
+                    hashtype = "crc32"
                     hilo = GetHash(texto_entry1, hashtype, text_buffer, hash_esperado, label)
                     hilo.start()
             except:
