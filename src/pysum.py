@@ -82,9 +82,8 @@ gettext.textdomain("pysum")
 gtk.glade.textdomain("pysum")
 
 # ===================================================================
-# Las siguientes Clases/funciones calculan los hash del un archivo.
+# La siguiente Clase calcula los hash de un archivo.
 # El .read() hay que realizarlo por partes para no llenar la memoria
-
 # Nota: hay 2 modulos para CRC32 en python: de zlib y de binascii
 # de las dos anteriores, zlib es más rapida (por lo que se usa esa)
 
@@ -92,9 +91,9 @@ gtk.glade.textdomain("pysum")
 class GetHash(threading.Thread):
     """Clase para calcular distintos hashs mediante threads"""
 
-    def __init__(self, filename, hashtype, text_buffer, hash_esperado=None, label=None):
+    def __init__(self, filename, hashtype, text_buffer, hash_esperado=None,
+        label=None):
         super(GetHash, self).__init__()
-        # guardamos algunos valores (que despues usamos)
         self.filename = filename
         self.hashtype = hashtype
         self.text_buffer = text_buffer
@@ -135,8 +134,7 @@ class GetHash(threading.Thread):
                 suma = hashlib.sha384()
             elif self.hashtype == "sha512":
                 suma = hashlib.sha512()
-            elif self.hashtype == "crc32":
-                # caso especial, no se usa hashlib sino zlib
+            elif self.hashtype == "crc32":  # caso especial se usa zlib
                 suma = 0
             # calculamos el hash (crc32 es un caso especial)
             if self.hashtype == "crc32":
@@ -164,20 +162,17 @@ class GetHash(threading.Thread):
                         break
                     suma.update(data)
                 self.archivo.close()
-                # Obtener cadena de texto con el hash
                 resultado = str(suma.hexdigest())
-                # Actualizar ventana (textbuffer)
                 gobject.idle_add(self.update_textbuffer, resultado)
             # comparamos el has hesperado con el obtenido
             if self.hash_esperado != None:
                 if resultado == self.hash_esperado:
                     mensaje = _("%s checksums are the same") % (self.hashtype)
                 else:
-                    mensaje = (_("Checksums are diferent\nFile: ") + resultado +
-                    _("\nExpected: ") + self.hash_esperado)
+                    mensaje = (_("Checksums are diferent\nFile: ") +
+                    resultado + _("\nExpected: ") + self.hash_esperado)
                 gobject.idle_add(self.update_label, mensaje)
-            # Terminar la ejecucion del run()
-            self.quit = True
+            self.quit = True  # Terminar la ejecucion del run()
 
 
 # Función que obtiene el texto de la opcion seleccionada en un ComboBox
@@ -222,7 +217,7 @@ class MainGui:
         # estas widgets son de las pestañas para obtener hash
         self.entry1 = self.widgets.get_widget("entry1")
         self.textview1 = self.widgets.get_widget("textview1")
-        # segunda pestaña (la uasada para comparar)
+        # segunda pestaña (la usada para comparar)
         self.entry2 = self.widgets.get_widget("entry2")
         self.entry3 = self.widgets.get_widget("entry3")
 
@@ -395,60 +390,44 @@ verify md5 and other checksum"))
         # haber antes o despues del texto) y luego joint unen los textos
         hash_esperado = hash_esperado.split()
         hash_esperado = "".join(hash_esperado)
-
         # Ahora obtenemos el nombre del archivo y tipo de hash
         texto_entry2 = self.entry2.get_text()
         combobox_selec = valor_combobox(self.combobox2)
-
         # iniciamos un buffer de texto y una etiqueta
         text_buffer = gtk.TextBuffer()
         label = gtk.Label()
-
         # Revisamos si se ha abierto un archivo
         if (len(texto_entry2) == 0):
             mensaje = _("Please choose a file")
             self.info(mensaje, _("Error"))
-            resultado_hash = "none"
         else:
-            try:
+            if os.path.exists(texto_entry2):
                 if combobox_selec == "md5":
                     hashtype = "md5"
-                    hilo = GetHash(texto_entry2, hashtype, text_buffer, hash_esperado, label)
-                    hilo.start()
                 elif combobox_selec == "sha1":
                     hashtype = "sha1"
-                    hilo = GetHash(texto_entry2, hashtype, text_buffer, hash_esperado, label)
-                    hilo.start()
                 elif combobox_selec == "sha224":
                     hashtype = "sha224"
-                    hilo = GetHash(texto_entry2, hashtype, text_buffer, hash_esperado, label)
-                    hilo.start()
                 elif combobox_selec == "sha256":
                     hashtype = "sha256"
-                    hilo = GetHash(texto_entry2, hashtype, text_buffer, hash_esperado, label)
-                    hilo.start()
                 elif combobox_selec == "sha384":
                     hashtype = "sha384"
-                    hilo = GetHash(texto_entry2, hashtype, text_buffer, hash_esperado, label)
-                    hilo.start()
                 elif combobox_selec == "sha512":
                     hashtype = "sha512"
-                    hilo = GetHash(texto_entry2, hashtype, text_buffer, hash_esperado, label)
-                    hilo.start()
                 elif combobox_selec == "crc32":
                     hashtype = "crc32"
-                    hilo = GetHash(texto_entry1, hashtype, text_buffer, hash_esperado, label)
-                    hilo.start()
-            except:
+                # Comprobamos si el resultado coincide con lo esperado
+                hilo = GetHash(texto_entry2, hashtype, text_buffer,
+                    hash_esperado, label)
+                hilo.start()
+                # crear una ventana que entrege el resultado de la comparacion
+                self.compare(label)
+            else:
                 mensaje = _("Can't open the file:") + texto_entry2
                 self.info(mensaje, _("Error"))
 
-        # Comprobamos si el resultado coincide con lo esperado
-        # crear una ventana que entrege el resultado de la comparacion
-        self.compare(label)
 
 if __name__ == "__main__":
-    # iniciar los threads (antes de la funcion/clase principal)
-    gobject.threads_init()
+    gobject.threads_init()  # iniciar threads (antes de la clase principal)
     MainGui()
     gtk.main()
