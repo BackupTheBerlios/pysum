@@ -47,10 +47,10 @@ you like (for example in your home, in /usr/share, etc.)
 Note 1:
 -------
 To work the pysum.glade file must be in the same directory as
-pysum.py OR ELSE you have to edit the value of RESOURCES_DIR
-specifying the location of the directory in where the pysum.glade
-file is found (aprox. lines 22-30 in /src/pysum.py), defaut value
-is RESOURCES_DIR = "/usr/share/pysum"
+pysum.py OR ELSE you have to edit the value of GUI_DIR specifying
+the location of the directory in where the pysum.glade file is
+found (aprox. lines 24-25 in /src/pysum.py), defaut value is
+GUI_DIR = "/usr/share/pysum"
 
 Note 2:
 -------
@@ -58,17 +58,17 @@ The images and icons for the program (pysum.png, pysum.svg,...)
 must be in the /img directory or in the same directory as pysum.py
 
 For example if you put the script in: /home/user/foo/pysum.py and
-the program needs open the image pysum.png, the program will try
+the program needs open the image "pysum.png", the program will try
 to open the image in the following locations (in this order):
 
-1)  /home/user/foo/img/pysum.png
-2)  /home/user/foo/pysum.png
-3)  /home/user/img/pysum.png
-4)  IMG_DIR value (aprox. lines 22-30 in src/pysum.py)
+1)  IMG_DIR value (by default: /usr/share/pysum/pysum.png)
+2)  /home/user/foo/img/pysum.png
+3)  /home/user/foo/pysum.png
+4)  /home/user/img/pysum.png
 
 If you need to establish a different location, please edit the value
 of IMG_DIR specifying the location of the directory (aprox. lines 
-22-30 in src/pysum.py), defaut value is IMG_DIR = "/usr/share/pysum"
+27-28 in src/pysum.py), defaut value is IMG_DIR = "/usr/share/pysum/"
 
 
 -------------------------

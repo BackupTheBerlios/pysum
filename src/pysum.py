@@ -22,23 +22,22 @@
 ########### START EDIT HERE ###########
 
 # Directory with the files (*.glade)
-RESOURCES_DIR = "/usr/share/pysum"
+GUI_DIR = "/usr/share/pysum"
 
 # Directory with the images (icons)
 IMG_DIR = "/usr/share/pysum"
 
 ########### STOP EDIT HERE ############
 
-
 # ===================================================================
 # Importamos los modulos necesarios
 
-import gettext
 import hashlib
 import zlib
 import os.path
 from os import pardir
 from os import curdir
+import gettext
 import threading
 
 # importamos los modulos para la parte grafica
@@ -46,8 +45,7 @@ try:
     import pygtk
     pygtk.require('2.0')
 except:
-    # Some distributions come with GTK2, but not pyGTK (or pyGTKv2)
-    pass
+    pass  # Some distributions come with GTK2, but not pyGTK (or pyGTKv2)
 
 try:
     import gtk
@@ -61,11 +59,11 @@ except:
 # Informacion del programa que se modifica con cierta frecuencia
 # (para no escribir tanto al sacar nuevas versiones)
 
-__version__ = "0.6 alpha"
+__version__ = "0.6 beta"
 AUTHOR = "Daniel Fuentes Barría <dbfuentes@gmail.com>"
 WEBSITE = "http://pysum.berlios.de/"
-LICENCE = "This program is free software; you can redistribute \
-it and/or modify it under the terms of the GNU General Public License \
+LICENCE = "This program is free software; you can redistribute it \
+and/or modify it under the terms of the GNU General Public License \
 as published by the Free Software Foundation; either version 2 of the \
 License, or (at your option) any later version.\n\nThis program is \
 distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; \
@@ -110,7 +108,7 @@ class GetHash(threading.Thread):
     def update_label(self, mensaje):
         # actualizar etiqueta (que se usa en la ventana de la comparacion)
         self.label.set_text(mensaje)
-        return self.text_buffer
+        return self.label
 
     def run(self):
         # metodo que se llama cuando se hace un start() sobre un thread
@@ -164,26 +162,24 @@ class GetHash(threading.Thread):
                 self.archivo.close()
                 resultado = str(suma.hexdigest())
                 gobject.idle_add(self.update_textbuffer, resultado)
-            # comparamos el has hesperado con el obtenido
+            # comparamos el hash hesperado con el obtenido (segunda tab)
             if self.hash_esperado != None:
                 if resultado == self.hash_esperado:
                     mensaje = _("%s checksums are the same") % (self.hashtype)
                 else:
                     mensaje = (_("Checksums are diferent\nFile: ") +
-                    resultado + _("\nExpected: ") + self.hash_esperado)
+                        resultado + _("\nExpected: ") + self.hash_esperado)
                 gobject.idle_add(self.update_label, mensaje)
             self.quit = True  # Terminar la ejecucion del run()
 
 
-# Función que obtiene el texto de la opcion seleccionada en un ComboBox
-
 def valor_combobox(combobox):
+    # Funcion que obtiene el texto de la opcion seleccionada en un ComboBox
     model = combobox.get_model()
     activo = combobox.get_active()
     if activo < 0:
         return None
     return model[activo][0]
-
 
 # ===================================================================
 # Clase para el Loop principal de la interfaz grafica (gtk-glade)
@@ -195,11 +191,10 @@ class MainGui:
     def __init__(self):
         # Le indicamos al programa que archivo XML de glade usar
         # la comprobación es para que funcione el paquete debian
-        if os.path.exists(os.path.join(os.curdir, "pysum.glade")):
-            self.widgets = gtk.glade.XML("pysum.glade")
+        if os.path.exists(os.path.join(GUI_DIR, "pysum.glade")):
+            self.widgets = gtk.glade.XML(os.path.join(GUI_DIR, "pysum.glade"))
         else:
-            self.widgets = gtk.glade.XML(os.path.join(RESOURCES_DIR,
-            "pysum.glade"))
+            self.widgets = gtk.glade.XML("pysum.glade")
 
         # Creamos un diccionario con los manejadores definidos en glade
         # y sus respectivas llamadas.
@@ -213,7 +208,7 @@ class MainGui:
         # Autoconectamos las signals.
         self.widgets.signal_autoconnect(signals)
 
-        ## Del archivo glade obtenemos los widgets a usar
+        # Del archivo glade obtenemos los widgets a usar
         # estas widgets son de las pestañas para obtener hash
         self.entry1 = self.widgets.get_widget("entry1")
         self.textview1 = self.widgets.get_widget("textview1")
@@ -227,9 +222,12 @@ class MainGui:
         self.combobox2 = self.widgets.get_widget("combobox2")
         self.combobox2.set_active(1)
 
-    # Similar al .glade, hay que determinar donde esta el icono del programa
-        # primero probamos buscar la imagen en ~/src/img/pysum.png
-        if os.path.exists(os.path.join(os.curdir, "img", "pysum.png")):
+    ## Similar al .glade, hay que determinar donde esta el icono del programa
+        # probamos buscar la imagen en la ruta definida en IMG_DIR
+        if os.path.exists(os.path.join(IMG_DIR, "pysum.png")):
+            self.icono = os.path.join(IMG_DIR, "pysum.png")
+        # probamos buscar la imagen en ~/src/img/pysum.png
+        elif os.path.exists(os.path.join(os.curdir, "img", "pysum.png")):
             self.icono = os.path.join(os.curdir, "img", "pysum.png")
         # probamos en ~/src/pysum.png
         elif os.path.exists(os.path.join(os.curdir, "pysum.png")):
@@ -238,15 +236,13 @@ class MainGui:
         elif os.path.exists(os.path.join(os.pardir, "img", "pysum.png")):
             self.icono = os.path.join(os.pardir, "img", "pysum.png")
         else:
-            # si no fue encontrado, cambiamos a la ruta definida en IMG_DIR
-            self.icono = os.path.join(IMG_DIR, "pysum.png")
-
+            self.icono = None
         # Ahora le agregamos el icono a la ventana
         self.mainwindow = self.widgets.get_widget("mainwindow")
         try:
             self.mainwindow.set_icon_from_file(self.icono)
         except:
-            print "Error: no se puede cargar el icono: %s" % (self.icono)
+            print (_("Error: unable to load icon %s") % (self.icono))
 
 # -------------------------------------------------------------------
 # En adelante comienza las ventanas y acciones propias del programa
@@ -255,30 +251,15 @@ class MainGui:
     # Funcion para abrir archivos (dialogo abrir archivo)
     def file_browse(self):
         "This function is used to browse for a file. Is a open dialog"
-        dialog_buttons = (gtk.STOCK_CANCEL,
-                         gtk.RESPONSE_CANCEL,
-                         gtk.STOCK_OPEN,
-                         gtk.RESPONSE_OK)
+        dialog_buttons = (gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL,
+                         gtk.STOCK_OPEN, gtk.RESPONSE_OK)
         file_open = gtk.FileChooserDialog(title=_("Select a file"),
-                    action=gtk.FILE_CHOOSER_ACTION_OPEN,
-                    buttons=dialog_buttons)
-        resultado = ""  # Aquí almacenamos la ruta del archivo
+                action=gtk.FILE_CHOOSER_ACTION_OPEN, buttons=dialog_buttons)
+        resultado = ""  # Aqui almacenamos la ruta del archivo
         if file_open.run() == gtk.RESPONSE_OK:
             resultado = file_open.get_filename()
         file_open.destroy()
         return resultado
-
-    # Ventana generica de para entregar informacion (errores, avisos, etc.)
-    def info(self, message, title="Error"):
-        "Display the info dialog "
-        dialogo = gtk.MessageDialog(parent=None, flags=0,
-                    buttons=gtk.BUTTONS_OK)
-        dialogo.set_title(title)
-        label = gtk.Label(message)
-        dialogo.vbox.pack_start(label, True, True, 0)
-        label.show()
-        dialogo.run()
-        dialogo.destroy()
 
     # Ventana Acerca de (los creditos).
     def about_info(self, data=None):
@@ -306,13 +287,13 @@ verify md5 and other checksum"))
         about.run()
         about.destroy()
 
-    # Ventana que entrega la comparacion dentre hashs)
-    def compare(self, label, title="Result"):
-        "Display the dialog "
+    # Ventana generica de para entregar informacion (errores, avisos, etc.)
+    def info(self, message, title="Error"):
+        "Display the info dialog"
         dialogo = gtk.MessageDialog(parent=None, flags=0,
                     buttons=gtk.BUTTONS_OK)
         dialogo.set_title(title)
-        label = label
+        label = message  # el message tiene que ser un gtk.Label()
         dialogo.vbox.pack_start(label, True, True, 0)
         label.show()
         dialogo.run()
@@ -346,7 +327,7 @@ verify md5 and other checksum"))
         text_buffer = gtk.TextBuffer()
         # Se intenta obtener el hash, dependiendo de la opcion escogida
         if (len(texto_entry1) == 0):  # No se especifica archivo
-            mensaje = _("Please choose a file")
+            mensaje = gtk.Label(_("Please choose a file"))
             self.info(mensaje, _("Error"))
         else:
             # Comprobar si el archivo existe:
@@ -368,7 +349,7 @@ verify md5 and other checksum"))
                 hilo = GetHash(texto_entry1, hashtype, text_buffer)
                 hilo.start()
             else:
-                mensaje = _("Can't open the file:") + texto_entry1
+                mensaje = gtk.Label((_("Can't open the file:") + texto_entry1))
                 self.info(mensaje, _("Error"))
         # Se muestra el buffer (hash obtenido) en textview
         self.textview1.set_buffer(text_buffer)
@@ -385,9 +366,9 @@ verify md5 and other checksum"))
     def on_buttonok2_clicked(self, widget):
         # Obtenemos el texto del hash esperado (del entry3)
         hash_esperado = str(self.entry3.get_text())
-        hash_esperado = hash_esperado.lower()
         # Al hacer split se pierde el doble, triple o mas espacios (que pueden
         # haber antes o despues del texto) y luego joint unen los textos
+        hash_esperado = hash_esperado.lower()
         hash_esperado = hash_esperado.split()
         hash_esperado = "".join(hash_esperado)
         # Ahora obtenemos el nombre del archivo y tipo de hash
@@ -396,10 +377,10 @@ verify md5 and other checksum"))
         # iniciamos un buffer de texto y una etiqueta
         text_buffer = gtk.TextBuffer()
         label = gtk.Label()
-        # Revisamos si se ha abierto un archivo
+        # Se intenta obtener el hash (primero comprobar el archivo)
         if (len(texto_entry2) == 0):
-            mensaje = _("Please choose a file")
-            self.info(mensaje, _("Error"))
+            label.set_text(_("Please choose a file"))
+            self.info(label, _("Error"))
         else:
             if os.path.exists(texto_entry2):
                 if combobox_selec == "md5":
@@ -421,13 +402,13 @@ verify md5 and other checksum"))
                     hash_esperado, label)
                 hilo.start()
                 # crear una ventana que entrege el resultado de la comparacion
-                self.compare(label)
+                self.info(label, _("Result"))
             else:
-                mensaje = _("Can't open the file:") + texto_entry2
-                self.info(mensaje, _("Error"))
+                label.set_text(_("Can't open the file:") + texto_entry2)
+                self.info(label, _("Error"))
 
 
 if __name__ == "__main__":
-    gobject.threads_init()  # iniciar threads (antes de la clase principal)
+    gobject.threads_init()
     MainGui()
     gtk.main()
