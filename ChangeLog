@@ -2,6 +2,8 @@
 
 	* Update documentation
 	* src/pysum.py: Code cleanup
+	* src/pysum.py: Add support for read files in text or binary mode
+	* src/pysum.glade: update the file (added RadioButtons for text/binary)
 
 2010-08-02  Daniel Fuentes B. <dbfuentes@gmail.com>
 

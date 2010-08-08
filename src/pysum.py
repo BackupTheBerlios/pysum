@@ -59,7 +59,7 @@ except:
 # Informacion del programa que se modifica con cierta frecuencia
 # (para no escribir tanto al sacar nuevas versiones)
 
-__version__ = "0.6 beta"
+__version__ = "0.6 beta1"
 AUTHOR = "Daniel Fuentes Barría <dbfuentes@gmail.com>"
 WEBSITE = "http://pysum.berlios.de/"
 LICENCE = "This program is free software; you can redistribute it \
@@ -89,11 +89,12 @@ gtk.glade.textdomain("pysum")
 class GetHash(threading.Thread):
     """Clase para calcular distintos hashs mediante threads"""
 
-    def __init__(self, filename, hashtype, text_buffer, hash_esperado=None,
-        label=None):
+    def __init__(self, filename, hashtype, text_mode, text_buffer,
+            hash_esperado=None, label=None):
         super(GetHash, self).__init__()
         self.filename = filename
         self.hashtype = hashtype
+        self.text_mode = text_mode  # modo texto o binario (para leer)
         self.text_buffer = text_buffer
         # la etiqueta y hash_esperado se usan en la comparacion:
         self.hash_esperado = hash_esperado
@@ -115,7 +116,10 @@ class GetHash(threading.Thread):
         while not self.quit:
             # Intenta leer el archivo
             try:
-                self.archivo = open(self.filename, "rb")
+                if self.text_mode == True:
+                    self.archivo = open(self.filename, "r")
+                else:  # read in binary mode
+                    self.archivo = open(self.filename, "rb")
             except:
                 self.archivo = None
                 print _("Can't open the file:"), self.filename
@@ -209,17 +213,21 @@ class MainGui:
         self.widgets.signal_autoconnect(signals)
 
         # Del archivo glade obtenemos los widgets a usar
-        # estas widgets son de las pestañas para obtener hash
+        # estas widgets son de las pestaña para obtener hash
         self.entry1 = self.widgets.get_widget("entry1")
         self.textview1 = self.widgets.get_widget("textview1")
-        # segunda pestaña (la usada para comparar)
+        self.combobox1 = self.widgets.get_widget("combobox1")
+        self.radiobutton1 = self.widgets.get_widget("radiobutton1")
+        self.radiobutton2 = self.widgets.get_widget("radiobutton2")
+        # los widgets de la segunda pestaña (la usada para comparar)
         self.entry2 = self.widgets.get_widget("entry2")
+        self.combobox2 = self.widgets.get_widget("combobox2")
+        self.radiobutton3 = self.widgets.get_widget("radiobutton3")
+        self.radiobutton4 = self.widgets.get_widget("radiobutton4")
         self.entry3 = self.widgets.get_widget("entry3")
 
-        # En el ComboBox hay que seleccionar por defecto la primera opcion
-        self.combobox1 = self.widgets.get_widget("combobox1")
+        # En los ComboBox, seleccionar por defecto la segunda opcion (md5)
         self.combobox1.set_active(1)
-        self.combobox2 = self.widgets.get_widget("combobox2")
         self.combobox2.set_active(1)
 
     ## Similar al .glade, hay que determinar donde esta el icono del programa
@@ -236,13 +244,13 @@ class MainGui:
         elif os.path.exists(os.path.join(os.pardir, "img", "pysum.png")):
             self.icono = os.path.join(os.pardir, "img", "pysum.png")
         else:
-            self.icono = None
-        # Ahora le agregamos el icono a la ventana
+            self.icono = "pysum.png"
+        # Ahora le agregamos el icono a la ventana principal
         self.mainwindow = self.widgets.get_widget("mainwindow")
         try:
             self.mainwindow.set_icon_from_file(self.icono)
         except:
-            print (_("Error: unable to load icon %s") % (self.icono))
+            print (_("Error: unable to load icon: %s") % (self.icono))
 
 # -------------------------------------------------------------------
 # En adelante comienza las ventanas y acciones propias del programa
@@ -252,7 +260,7 @@ class MainGui:
     def file_browse(self):
         "This function is used to browse for a file. Is a open dialog"
         dialog_buttons = (gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL,
-                         gtk.STOCK_OPEN, gtk.RESPONSE_OK)
+                gtk.STOCK_OPEN, gtk.RESPONSE_OK)
         file_open = gtk.FileChooserDialog(title=_("Select a file"),
                 action=gtk.FILE_CHOOSER_ACTION_OPEN, buttons=dialog_buttons)
         resultado = ""  # Aqui almacenamos la ruta del archivo
@@ -279,7 +287,7 @@ verify md5 and other checksum"))
         try:
             about.set_logo(gtk.gdk.pixbuf_new_from_file(self.icono))
         except:
-            print "Error: no se puede cargar el icono: %s" % (self.icono)
+            print _("Error: unable to load icon: %s") % (self.icono)
         about.set_website(WEBSITE)
         about.set_authors([AUTHOR])
         about.set_license(LICENCE)
@@ -303,7 +311,7 @@ verify md5 and other checksum"))
 # Declaramos las acciones a realizar (por los menus, botones, etc.):
 # -------------------------------------------------------------------
 
-    # Definimos las acciones de los menus #
+    # Definimos las acciones de los menus
     def on_about1_activate(self, widget):
         "Open the About windows"
         self.about_info()
@@ -319,10 +327,17 @@ verify md5 and other checksum"))
 
     def on_buttonok1_clicked(self, widget):  # Boton ok para calcular hash
         "This button generate the hash"
-        # Comprobamos la opcion elegida en el ComboBox (tipo de hash)
-        combobox_selec = valor_combobox(self.combobox1)
-        # Se obtiene la ruta del archivo desde la entrada
+        # Se obtiene la ruta del archivo (entry1) y el tipo de hash (ComboBox)
         texto_entry1 = self.entry1.get_text()
+        combobox_selec = valor_combobox(self.combobox1)
+        # obtener el modo de lectura segun el radiobutton seleccionado
+        # RadioButton.get_active() returns True if the button is checked
+        if self.radiobutton1.get_active() == True:
+            text_mode = True
+        elif self.radiobutton2.get_active() == True:
+            text_mode = False
+        else:
+            text_mode = False
         # Se crea un buffer de texto (para el resultado del hash)
         text_buffer = gtk.TextBuffer()
         # Se intenta obtener el hash, dependiendo de la opcion escogida
@@ -346,7 +361,8 @@ verify md5 and other checksum"))
                     hashtype = "sha512"
                 elif combobox_selec == "crc32":
                     hashtype = "crc32"
-                hilo = GetHash(texto_entry1, hashtype, text_buffer)
+                # Calcular el hash con estos datos
+                hilo = GetHash(texto_entry1, hashtype, text_mode, text_buffer)
                 hilo.start()
             else:
                 mensaje = gtk.Label((_("Can't open the file:") + texto_entry1))
@@ -374,6 +390,11 @@ verify md5 and other checksum"))
         # Ahora obtenemos el nombre del archivo y tipo de hash
         texto_entry2 = self.entry2.get_text()
         combobox_selec = valor_combobox(self.combobox2)
+        # comprobar el modo de lectura a usar (text/binary)
+        if self.radiobutton3.get_active() == True:
+            text_mode = True
+        else:  # en caso de estar el radiobutton4 seleccionado
+            text_mode = False
         # iniciamos un buffer de texto y una etiqueta
         text_buffer = gtk.TextBuffer()
         label = gtk.Label()
@@ -398,7 +419,7 @@ verify md5 and other checksum"))
                 elif combobox_selec == "crc32":
                     hashtype = "crc32"
                 # Comprobamos si el resultado coincide con lo esperado
-                hilo = GetHash(texto_entry2, hashtype, text_buffer,
+                hilo = GetHash(texto_entry2, hashtype, text_mode, text_buffer,
                     hash_esperado, label)
                 hilo.start()
                 # crear una ventana que entrege el resultado de la comparacion
