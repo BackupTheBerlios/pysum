@@ -59,7 +59,7 @@ except:
 # Informacion del programa que se modifica con cierta frecuencia
 # (para no escribir tanto al sacar nuevas versiones)
 
-__version__ = "0.6 beta1"
+__version__ = "0.6 beta2"
 AUTHOR = "Daniel Fuentes Barría <dbfuentes@gmail.com>"
 WEBSITE = "http://pysum.berlios.de/"
 LICENCE = "This program is free software; you can redistribute it \
@@ -104,12 +104,12 @@ class GetHash(threading.Thread):
     def update_textbuffer(self, resultado):
         # Nota: resultado es una cadena de texto con el hash obtenido
         self.text_buffer.set_text(resultado)
-        return self.text_buffer
+        return False
 
     def update_label(self, mensaje):
         # actualizar etiqueta (que se usa en la ventana de la comparacion)
         self.label.set_text(mensaje)
-        return self.label
+        return False
 
     def run(self):
         # metodo que se llama cuando se hace un start() sobre un thread
@@ -215,10 +215,10 @@ class MainGui:
         # Del archivo glade obtenemos los widgets a usar
         # estas widgets son de las pestaña para obtener hash
         self.entry1 = self.widgets.get_widget("entry1")
-        self.textview1 = self.widgets.get_widget("textview1")
         self.combobox1 = self.widgets.get_widget("combobox1")
         self.radiobutton1 = self.widgets.get_widget("radiobutton1")
         self.radiobutton2 = self.widgets.get_widget("radiobutton2")
+        self.textview1 = self.widgets.get_widget("textview1")
         # los widgets de la segunda pestaña (la usada para comparar)
         self.entry2 = self.widgets.get_widget("entry2")
         self.combobox2 = self.widgets.get_widget("combobox2")
@@ -364,11 +364,12 @@ verify md5 and other checksum"))
                 # Calcular el hash con estos datos
                 hilo = GetHash(texto_entry1, hashtype, text_mode, text_buffer)
                 hilo.start()
+                # Se muestra el buffer (hash obtenido) en textview
+                self.textview1.set_buffer(text_buffer)
+                hilo.quit = True
             else:
                 mensaje = gtk.Label((_("Can't open the file:") + texto_entry1))
                 self.info(mensaje, _("Error"))
-        # Se muestra el buffer (hash obtenido) en textview
-        self.textview1.set_buffer(text_buffer)
 
     # ---------------------------------------------------------------
     # Pestaña que compara el hash de un archivo con un valor experado
@@ -424,6 +425,7 @@ verify md5 and other checksum"))
                 hilo.start()
                 # crear una ventana que entrege el resultado de la comparacion
                 self.info(label, _("Result"))
+                hilo.quit = True
             else:
                 label.set_text(_("Can't open the file:") + texto_entry2)
                 self.info(label, _("Error"))

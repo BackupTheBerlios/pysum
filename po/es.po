@@ -1,56 +1,31 @@
 # Spanish translations for pysum package.
-# Copyright (C) 2009 THE PYSUM'S COPYRIGHT HOLDER
+# Copyright (C) 2010 Daniel Fuentes B.
 # This file is distributed under the same license as the pysum package.
-# Daniel Fuentes B. <dbfuentes@gmail.com>, 2009.
+# Daniel Fuentes B. <dbfuentes@gmail.com>, 2010.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: pysum\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-04-15 19:02-0400\n"
-"PO-Revision-Date: 2010-04-15 19:16-0300\n"
+"POT-Creation-Date: 2010-08-08 20:21-0400\n"
+"PO-Revision-Date: 2010-08-08 20:21-0400\n"
 "Last-Translator: Daniel Fuentes Barría <dbfuentes@gmail.com>\n"
 "Language-Team: Spanish\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: pysum.py:95
-#: pysum.py:352
-#: pysum.py:391
+#: pysum.py:125 pysum.py:371 pysum.py:430
 msgid "Can't open the file:"
 msgstr "No se puede abrir el archivo:"
 
-#: pysum.py:261
-msgid "Select a file"
-msgstr "Seleccione un archivo"
-
-#: pysum.py:288
-msgid "A pygtk application for create and verify md5 and other checksum"
-msgstr "Una aplicación para obtener y verificar hash md5 y otras sumas de verificación"
-
-#: pysum.py:349
-#: pysum.py:371
-msgid "Please choose a file"
-msgstr "Por favor seleccione un archivo"
-
-#: pysum.py:350
-#: pysum.py:353
-#: pysum.py:372
-#: pysum.py:392
-msgid "Error"
-msgstr "Error"
-
-#: pysum.py:406
-#, python-format
-msgid "%s Checksums are the same"
+#: pysum.py:172
+#, fuzzy, python-format
+msgid "%s checksums are the same"
 msgstr "Las sumas de verificación %s son iguales"
 
-#: pysum.py:407
-msgid "Ok"
-msgstr "Ok"
-
-#: pysum.py:411
+#: pysum.py:174
 msgid ""
 "Checksums are diferent\n"
 "File: "
@@ -58,7 +33,7 @@ msgstr ""
 "Las sumas de verificación son diferentes\n"
 "Archivo: "
 
-#: pysum.py:412
+#: pysum.py:175
 msgid ""
 "\n"
 "Expected: "
@@ -66,44 +41,81 @@ msgstr ""
 "\n"
 "Esperado: "
 
-#: pysum.py:413
-msgid "Warning"
-msgstr "Advertencia"
+#: pysum.py:253 pysum.py:290
+#, python-format
+msgid "Error: unable to load icon: %s"
+msgstr "Error: no se puede abrir el icono: %s"
+
+#: pysum.py:264
+msgid "Select a file"
+msgstr "Seleccione un archivo"
+
+#: pysum.py:278
+msgid "A pygtk application for create and verify md5 and other checksum"
+msgstr "Una aplicación para obtener y verificar hash md5 y otras sumas de verificación"
+
+#: pysum.py:345 pysum.py:404
+msgid "Please choose a file"
+msgstr "Por favor seleccione un archivo"
+
+#: pysum.py:346 pysum.py:372 pysum.py:405 pysum.py:431
+msgid "Error"
+msgstr "Error"
+
+#: pysum.py:427
+msgid "Result"
+msgstr "Resultado"
 
 #: pysum.glade.h:1
-msgid "Checksum: "
-msgstr "Suma de verificación: "
+#, fuzzy
+msgid "Checksum:"
+msgstr "Suma de verificación:"
 
 #: pysum.glade.h:2
 msgid "Compare"
 msgstr "Comparar"
 
 #: pysum.glade.h:3
-msgid "Expected value: "
-msgstr "Valor esperado: "
+#, fuzzy
+msgid "Expected value:"
+msgstr "Valor esperado:"
 
 #: pysum.glade.h:4
-msgid "File: "
-msgstr "Archivo: "
+#, fuzzy
+msgid "File:"
+msgstr "Archivo:"
 
 #: pysum.glade.h:5
 msgid "Generate"
 msgstr "Generar"
 
 #: pysum.glade.h:6
-msgid "Hash type: "
-msgstr "Tipo de Hash: "
+#, fuzzy
+msgid "Hash type:"
+msgstr "Tipo de Hash:"
 
 #: pysum.glade.h:7
+msgid "Read mode:"
+msgstr "Modo de lectura:"
+
+#: pysum.glade.h:8
 msgid "_File"
 msgstr "_Archivo"
 
-#: pysum.glade.h:8
+#: pysum.glade.h:9
 msgid "_Help"
 msgstr "Ay_uda"
 
-#~ msgid "_About"
-#~ msgstr "Acerca _de"
-#~ msgid "pySum"
-#~ msgstr "pySum"
+#: pysum.glade.h:10
+msgid "binary"
+msgstr "binario"
 
+#: pysum.glade.h:11
+msgid "text"
+msgstr "texto"
+
+#~ msgid "Ok"
+#~ msgstr "Ok"
+
+#~ msgid "Warning"
+#~ msgstr "Advertencia"

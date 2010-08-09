@@ -1,3 +1,9 @@
+2010-08-08  Daniel Fuentes B. <dbfuentes@gmail.com>
+
+	* po/pysum.pot: Update the .pot file
+	* po/: Update the translations
+	* src/pysum.py: Update code (threads)
+
 2010-08-07  Daniel Fuentes B. <dbfuentes@gmail.com>
 
 	* Update documentation

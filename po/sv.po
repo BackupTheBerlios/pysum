@@ -1,4 +1,4 @@
-# German translation for pysum
+# Swedish translation for pysum
 # Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
 # This file is distributed under the same license as the pysum package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
@@ -8,10 +8,10 @@ msgstr ""
 "Project-Id-Version: pysum\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-08-08 20:21-0400\n"
-"PO-Revision-Date: 2010-06-06 22:04+0000\n"
-"Last-Translator: Aisano <Unknown>\n"
-"Language-Team: German <de@li.org>\n"
-"Language: de\n"
+"PO-Revision-Date: 2010-04-28 15:20+0000\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: Swedish <sv@li.org>\n"
+"Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -20,28 +20,24 @@ msgstr ""
 
 #: pysum.py:125 pysum.py:371 pysum.py:430
 msgid "Can't open the file:"
-msgstr "Kann Datei nicht öffnen:"
+msgstr "Kan inte öppna filen:"
 
 #: pysum.py:172
-#, fuzzy, python-format
+#, python-format
 msgid "%s checksums are the same"
-msgstr "%s Prüfsummen sind gleich"
+msgstr ""
 
 #: pysum.py:174
 msgid ""
 "Checksums are diferent\n"
 "File: "
 msgstr ""
-"Checksums sind verschieden\n"
-"Datei: "
 
 #: pysum.py:175
 msgid ""
 "\n"
 "Expected: "
 msgstr ""
-"\n"
-"Erwartet "
 
 #: pysum.py:253 pysum.py:290
 #, python-format
@@ -50,19 +46,19 @@ msgstr ""
 
 #: pysum.py:264
 msgid "Select a file"
-msgstr "Eine Datei auswählen"
+msgstr "Välj en fil"
 
 #: pysum.py:278
 msgid "A pygtk application for create and verify md5 and other checksum"
-msgstr "Eine pyGTK-Anwendung für das Erzeugen und überprüfen von md5- und anderen Prüfsummen"
+msgstr "En pygtk applikation för att skapa och verifiera md5 summor och andra kontrollsummor"
 
 #: pysum.py:345 pysum.py:404
 msgid "Please choose a file"
-msgstr "Bitte eine Datei wählen"
+msgstr "Välj en fil"
 
 #: pysum.py:346 pysum.py:372 pysum.py:405 pysum.py:431
 msgid "Error"
-msgstr "Fehler"
+msgstr "Fel"
 
 #: pysum.py:427
 msgid "Result"
@@ -71,30 +67,29 @@ msgstr ""
 #: pysum.glade.h:1
 #, fuzzy
 msgid "Checksum:"
-msgstr "Prüfsumme:"
+msgstr "Kontrollsumma:"
 
 #: pysum.glade.h:2
 msgid "Compare"
-msgstr "Vergleiche"
+msgstr ""
 
 #: pysum.glade.h:3
-#, fuzzy
 msgid "Expected value:"
-msgstr "Erwarteter Wert:"
+msgstr ""
 
 #: pysum.glade.h:4
 #, fuzzy
 msgid "File:"
-msgstr "Datei:"
+msgstr "Fil:"
 
 #: pysum.glade.h:5
 msgid "Generate"
-msgstr "Erzeugen"
+msgstr "Generera"
 
 #: pysum.glade.h:6
 #, fuzzy
 msgid "Hash type:"
-msgstr "Hash-Typ:"
+msgstr "Hashtyp:"
 
 #: pysum.glade.h:7
 msgid "Read mode:"
@@ -102,11 +97,11 @@ msgstr ""
 
 #: pysum.glade.h:8
 msgid "_File"
-msgstr "_Datei"
+msgstr "_Arkiv"
 
 #: pysum.glade.h:9
 msgid "_Help"
-msgstr "_Hilfe"
+msgstr "_Hjälp"
 
 #: pysum.glade.h:10
 msgid "binary"
@@ -115,9 +110,3 @@ msgstr ""
 #: pysum.glade.h:11
 msgid "text"
 msgstr ""
-
-#~ msgid "Ok"
-#~ msgstr "Okay"
-
-#~ msgid "Warning"
-#~ msgstr "Achtung"

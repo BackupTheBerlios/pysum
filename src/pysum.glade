@@ -235,6 +235,7 @@ sha512</property>
                         <property name="right_attach">2</property>
                         <property name="top_attach">3</property>
                         <property name="bottom_attach">4</property>
+                        <property name="y_padding">2</property>
                       </packing>
                     </child>
                     <child>

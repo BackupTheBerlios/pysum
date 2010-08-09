@@ -6,90 +6,114 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: pysum\n"
-"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-04-15 19:02-0400\n"
-"PO-Revision-Date: 2010-04-28 15:20+0000\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-08-08 20:21-0400\n"
+"PO-Revision-Date: 2010-06-21 20:26+0000\n"
+"Last-Translator: julien Lengrand-Lambert <Unknown>\n"
 "Language-Team: French <fr@li.org>\n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-05-29 18:32+0000\n"
+"X-Launchpad-Export-Date: 2010-08-09 00:12+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: pysum.py:95 pysum.py:352 pysum.py:391
+#: pysum.py:125 pysum.py:371 pysum.py:430
 msgid "Can't open the file:"
 msgstr "Impossible d'ouvrir le fichier:"
 
-#: pysum.py:261
-msgid "Select a file"
-msgstr "Choisissez un fichier"
+#: pysum.py:172
+#, fuzzy, python-format
+msgid "%s checksums are the same"
+msgstr "%s Les sommes de contrôle sont identiques"
 
-#: pysum.py:288
-msgid "A pygtk application for create and verify md5 and other checksum"
-msgstr "Une application en pygtk pour créer et vérifier le md5 ainsi que d'autres sommes de de contrôle"
-
-#: pysum.py:349 pysum.py:371
-msgid "Please choose a file"
-msgstr "Veuillez choisir un fichier"
-
-#: pysum.py:350 pysum.py:353 pysum.py:372 pysum.py:392
-msgid "Error"
-msgstr "Erreur"
-
-#: pysum.py:406
-#, python-format
-msgid "%s Checksums are the same"
-msgstr ""
-
-#: pysum.py:407
-msgid "Ok"
-msgstr ""
-
-#: pysum.py:411
+#: pysum.py:174
 msgid ""
 "Checksums are diferent\n"
 "File: "
 msgstr ""
 
-#: pysum.py:412
+#: pysum.py:175
 msgid ""
 "\n"
 "Expected: "
 msgstr ""
 
-#: pysum.py:413
-msgid "Warning"
+#: pysum.py:253 pysum.py:290
+#, python-format
+msgid "Error: unable to load icon: %s"
+msgstr ""
+
+#: pysum.py:264
+msgid "Select a file"
+msgstr "Sélectionnez un fichier"
+
+#: pysum.py:278
+msgid "A pygtk application for create and verify md5 and other checksum"
+msgstr "Une application en pygtk pour créer et vérifier le md5 ainsi que d'autres sommes de contrôle"
+
+#: pysum.py:345 pysum.py:404
+msgid "Please choose a file"
+msgstr "Veuillez choisir un fichier"
+
+#: pysum.py:346 pysum.py:372 pysum.py:405 pysum.py:431
+msgid "Error"
+msgstr "Erreur"
+
+#: pysum.py:427
+msgid "Result"
 msgstr ""
 
 #: pysum.glade.h:1
-msgid "Checksum: "
-msgstr "Somme de contrôle: "
+#, fuzzy
+msgid "Checksum:"
+msgstr "Somme de contrôle:"
 
 #: pysum.glade.h:2
 msgid "Compare"
-msgstr ""
+msgstr "Comparer"
 
 #: pysum.glade.h:3
-msgid "Expected value: "
-msgstr ""
+#, fuzzy
+msgid "Expected value:"
+msgstr "Valeur attendue:"
 
 #: pysum.glade.h:4
-msgid "File: "
-msgstr "Fichier: "
+#, fuzzy
+msgid "File:"
+msgstr "Fichier:"
 
 #: pysum.glade.h:5
 msgid "Generate"
 msgstr "Générer"
 
 #: pysum.glade.h:6
-msgid "Hash type: "
-msgstr "Type de Hashage : "
+#, fuzzy
+msgid "Hash type:"
+msgstr "Type de Hashage :"
 
 #: pysum.glade.h:7
+msgid "Read mode:"
+msgstr ""
+
+#: pysum.glade.h:8
 msgid "_File"
 msgstr "_Fichier"
 
-#: pysum.glade.h:8
+#: pysum.glade.h:9
 msgid "_Help"
 msgstr "_Aide"
+
+#: pysum.glade.h:10
+msgid "binary"
+msgstr ""
+
+#: pysum.glade.h:11
+msgid "text"
+msgstr ""
+
+#~ msgid "Ok"
+#~ msgstr "Ok"
+
+#~ msgid "Warning"
+#~ msgstr "Attention"

@@ -6,90 +6,107 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: pysum\n"
-"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-04-15 19:02-0400\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-08-08 20:21-0400\n"
 "PO-Revision-Date: 2010-04-28 15:20+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Danish <da@li.org>\n"
+"Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Launchpad-Export-Date: 2010-05-29 18:32+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: pysum.py:95 pysum.py:352 pysum.py:391
+#: pysum.py:125 pysum.py:371 pysum.py:430
 msgid "Can't open the file:"
 msgstr "Kan ikke åbne filen:"
 
-#: pysum.py:261
-msgid "Select a file"
-msgstr "Vælg en fil"
-
-#: pysum.py:288
-msgid "A pygtk application for create and verify md5 and other checksum"
-msgstr "Et pygtk-program til at oprette og verificere md5 og andre check-summer"
-
-#: pysum.py:349 pysum.py:371
-msgid "Please choose a file"
-msgstr "Vælg venligst en fil"
-
-#: pysum.py:350 pysum.py:353 pysum.py:372 pysum.py:392
-msgid "Error"
-msgstr "Fejl"
-
-#: pysum.py:406
+#: pysum.py:172
 #, python-format
-msgid "%s Checksums are the same"
+msgid "%s checksums are the same"
 msgstr ""
 
-#: pysum.py:407
-msgid "Ok"
-msgstr ""
-
-#: pysum.py:411
+#: pysum.py:174
 msgid ""
 "Checksums are diferent\n"
 "File: "
 msgstr ""
 
-#: pysum.py:412
+#: pysum.py:175
 msgid ""
 "\n"
 "Expected: "
 msgstr ""
 
-#: pysum.py:413
-msgid "Warning"
+#: pysum.py:253 pysum.py:290
+#, python-format
+msgid "Error: unable to load icon: %s"
+msgstr ""
+
+#: pysum.py:264
+msgid "Select a file"
+msgstr "Vælg en fil"
+
+#: pysum.py:278
+msgid "A pygtk application for create and verify md5 and other checksum"
+msgstr "Et pygtk-program til at oprette og verificere md5 og andre check-summer"
+
+#: pysum.py:345 pysum.py:404
+msgid "Please choose a file"
+msgstr "Vælg venligst en fil"
+
+#: pysum.py:346 pysum.py:372 pysum.py:405 pysum.py:431
+msgid "Error"
+msgstr "Fejl"
+
+#: pysum.py:427
+msgid "Result"
 msgstr ""
 
 #: pysum.glade.h:1
-msgid "Checksum: "
-msgstr "Checksum: "
+#, fuzzy
+msgid "Checksum:"
+msgstr "Checksum:"
 
 #: pysum.glade.h:2
 msgid "Compare"
 msgstr ""
 
 #: pysum.glade.h:3
-msgid "Expected value: "
+msgid "Expected value:"
 msgstr ""
 
 #: pysum.glade.h:4
-msgid "File: "
-msgstr "Fil: "
+#, fuzzy
+msgid "File:"
+msgstr "Fil:"
 
 #: pysum.glade.h:5
 msgid "Generate"
 msgstr "Generér"
 
 #: pysum.glade.h:6
-msgid "Hash type: "
-msgstr "Hash-type: "
+#, fuzzy
+msgid "Hash type:"
+msgstr "Hash-type:"
 
 #: pysum.glade.h:7
+msgid "Read mode:"
+msgstr ""
+
+#: pysum.glade.h:8
 msgid "_File"
 msgstr "_Fil"
 
-#: pysum.glade.h:8
+#: pysum.glade.h:9
 msgid "_Help"
 msgstr "_Hjælp"
+
+#: pysum.glade.h:10
+msgid "binary"
+msgstr ""
+
+#: pysum.glade.h:11
+msgid "text"
+msgstr ""

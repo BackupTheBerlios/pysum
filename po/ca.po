@@ -6,48 +6,28 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: pysum\n"
-"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-04-15 19:02-0400\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-08-08 20:21-0400\n"
 "PO-Revision-Date: 2010-05-22 18:42+0000\n"
 "Last-Translator: oriolsbd <oriolsbd@yahoo.es>\n"
 "Language-Team: Catalan <ca@li.org>\n"
+"Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Launchpad-Export-Date: 2010-05-29 18:32+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: pysum.py:95 pysum.py:352 pysum.py:391
+#: pysum.py:125 pysum.py:371 pysum.py:430
 msgid "Can't open the file:"
 msgstr "No s'ha pogut obrir el fitxer:"
 
-#: pysum.py:261
-msgid "Select a file"
-msgstr "Seleccioneu un fitxer"
-
-#: pysum.py:288
-msgid "A pygtk application for create and verify md5 and other checksum"
-msgstr ""
-"Una aplicació pygtk per a crear sumes de verificació md5 i d'altres tipus"
-
-#: pysum.py:349 pysum.py:371
-msgid "Please choose a file"
-msgstr "Escolliu un fitxer"
-
-#: pysum.py:350 pysum.py:353 pysum.py:372 pysum.py:392
-msgid "Error"
-msgstr "Error"
-
-#: pysum.py:406
-#, python-format
-msgid "%s Checksums are the same"
+#: pysum.py:172
+#, fuzzy, python-format
+msgid "%s checksums are the same"
 msgstr "%s Les sumes de verificació són iguals"
 
-#: pysum.py:407
-msgid "Ok"
-msgstr "Accepta"
-
-#: pysum.py:411
+#: pysum.py:174
 msgid ""
 "Checksums are diferent\n"
 "File: "
@@ -55,7 +35,7 @@ msgstr ""
 "Les sumes de verificació són diferents\n"
 "Fitxer: "
 
-#: pysum.py:412
+#: pysum.py:175
 msgid ""
 "\n"
 "Expected: "
@@ -63,38 +43,81 @@ msgstr ""
 "\n"
 "Esperat: "
 
-#: pysum.py:413
-msgid "Warning"
-msgstr "Avís"
+#: pysum.py:253 pysum.py:290
+#, python-format
+msgid "Error: unable to load icon: %s"
+msgstr ""
+
+#: pysum.py:264
+msgid "Select a file"
+msgstr "Seleccioneu un fitxer"
+
+#: pysum.py:278
+msgid "A pygtk application for create and verify md5 and other checksum"
+msgstr "Una aplicació pygtk per a crear sumes de verificació md5 i d'altres tipus"
+
+#: pysum.py:345 pysum.py:404
+msgid "Please choose a file"
+msgstr "Escolliu un fitxer"
+
+#: pysum.py:346 pysum.py:372 pysum.py:405 pysum.py:431
+msgid "Error"
+msgstr "Error"
+
+#: pysum.py:427
+msgid "Result"
+msgstr ""
 
 #: pysum.glade.h:1
-msgid "Checksum: "
-msgstr "Suma de verificació: "
+#, fuzzy
+msgid "Checksum:"
+msgstr "Suma de verificació:"
 
 #: pysum.glade.h:2
 msgid "Compare"
 msgstr "Compara"
 
 #: pysum.glade.h:3
-msgid "Expected value: "
-msgstr "Valor esperat: "
+#, fuzzy
+msgid "Expected value:"
+msgstr "Valor esperat:"
 
 #: pysum.glade.h:4
-msgid "File: "
-msgstr "Fitxer: "
+#, fuzzy
+msgid "File:"
+msgstr "Fitxer:"
 
 #: pysum.glade.h:5
 msgid "Generate"
 msgstr "Genera"
 
 #: pysum.glade.h:6
-msgid "Hash type: "
-msgstr "Tipus de resum: "
+#, fuzzy
+msgid "Hash type:"
+msgstr "Tipus de resum:"
 
 #: pysum.glade.h:7
+msgid "Read mode:"
+msgstr ""
+
+#: pysum.glade.h:8
 msgid "_File"
 msgstr "_Fitxer"
 
-#: pysum.glade.h:8
+#: pysum.glade.h:9
 msgid "_Help"
 msgstr "_Ajuda"
+
+#: pysum.glade.h:10
+msgid "binary"
+msgstr ""
+
+#: pysum.glade.h:11
+msgid "text"
+msgstr ""
+
+#~ msgid "Ok"
+#~ msgstr "Accepta"
+
+#~ msgid "Warning"
+#~ msgstr "Avís"
