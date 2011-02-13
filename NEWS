@@ -1,3 +1,9 @@
+2011-02-13  Daniel Fuentes B. <dbfuentes@gmail.com>
+
+	* Version 0.6 Released
+	* Add support for read files in text or binary mode
+	* Now use threads, for better performance
+
 2010-05-29  Daniel Fuentes B. <dbfuentes@gmail.com>
 
 	* Version 0.5 Released

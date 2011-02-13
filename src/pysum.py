@@ -2,7 +2,7 @@
 # -*- coding: UTF-8 -*-
 
 # pysum - A pygtk app to create and check md5 and other checksum
-# Copyright (C) 2008-2010 Daniel Fuentes Barría <dbfuentes@gmail.com>
+# Copyright (C) 2008-2011 Daniel Fuentes Barría <dbfuentes@gmail.com>
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -59,7 +59,7 @@ except:
 # Informacion del programa que se modifica con cierta frecuencia
 # (para no escribir tanto al sacar nuevas versiones)
 
-__version__ = "0.6 beta2"
+__version__ = "0.6"
 AUTHOR = "Daniel Fuentes Barría <dbfuentes@gmail.com>"
 WEBSITE = "http://pysum.berlios.de/"
 LICENCE = "This program is free software; you can redistribute it \
@@ -277,7 +277,7 @@ class MainGui:
         about.set_version(__version__)
         about.set_comments(_("A pygtk application for create and \
 verify md5 and other checksum"))
-        about.set_copyright("Copyright © 2008-2010 Daniel Fuentes B.")
+        about.set_copyright("Copyright © 2008-2011 Daniel Fuentes B.")
 
         def openHomePage(widget, url, url2):  # Para abrir el sitio
             import webbrowser

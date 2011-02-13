@@ -28,6 +28,6 @@ Written by Daniel Fuentes B. <dbfuentes@gmail.com>
 
 COPYING
 -------
-Copyright (C) 2008-2010 Daniel Fuentes B. Free use of this software is
+Copyright (C) 2008-2011 Daniel Fuentes B. Free use of this software is
 granted under the terms of the GNU General Public License (GPL).
 
