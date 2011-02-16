@@ -59,7 +59,7 @@ except:
 # Informacion del programa que se modifica con cierta frecuencia
 # (para no escribir tanto al sacar nuevas versiones)
 
-__version__ = "0.6"
+__version__ = "0.7 Alpha"
 AUTHOR = "Daniel Fuentes Barría <dbfuentes@gmail.com>"
 WEBSITE = "http://pysum.berlios.de/"
 LICENCE = "This program is free software; you can redistribute it \
@@ -80,7 +80,7 @@ gettext.textdomain("pysum")
 gtk.glade.textdomain("pysum")
 
 # ===================================================================
-# La siguiente Clase calcula los hash de un archivo.
+# La siguientes Clases calculan los hash de un archivo.
 # El .read() hay que realizarlo por partes para no llenar la memoria
 # Nota: hay 2 modulos para CRC32 en python: de zlib y de binascii
 # de las dos anteriores, zlib es más rapida (por lo que se usa esa)
@@ -156,6 +156,82 @@ class GetHash(threading.Thread):
                 resultado = "%08x" % (suma)
                 # Actualizar ventana (textbuffer)
                 gobject.idle_add(self.update_textbuffer, resultado)
+            # Calculamos el hash para los demas casos
+            else:
+                while True:
+                    data = self.archivo.read(10240)
+                    if not data:
+                        break
+                    suma.update(data)
+                self.archivo.close()
+                resultado = str(suma.hexdigest())
+                gobject.idle_add(self.update_textbuffer, resultado)
+            # comparamos el hash hesperado con el obtenido (segunda tab)
+            if self.hash_esperado != None:
+                if resultado == self.hash_esperado:
+                    mensaje = _("%s checksums are the same") % (self.hashtype)
+                else:
+                    mensaje = (_("Checksums are diferent\nFile: ") +
+                        resultado + _("\nExpected: ") + self.hash_esperado)
+                gobject.idle_add(self.update_label, mensaje)
+            self.quit = True  # Terminar la ejecucion del run()
+
+
+class HashCompare(threading.Thread):
+    """Calcula el hash y luego lo compara con el esperado (usa threads)"""
+
+    def __init__(self, filename, hashtype, text_mode, hash_esperado=None,
+            label=None):
+        super(GetHash, self).__init__()
+        self.filename = filename
+        self.hashtype = hashtype
+        self.text_mode = text_mode  # modo texto o binario (para leer)
+        self.hash_esperado = hash_esperado
+        self.label = label
+        self.quit = False
+
+    def update_label(self, mensaje):
+        # actualizar etiqueta (que se usa en la ventana de la comparacion)
+        self.label.set_text(mensaje)
+        return False
+
+    def run(self):
+        while not self.quit:
+            try:
+                if self.text_mode == True:
+                    self.archivo = open(self.filename, "r")
+                else:
+                    self.archivo = open(self.filename, "rb")
+            except:
+                self.archivo = None
+                print _("Can't open the file:"), self.filename
+            # Dependiendo del tipo de hash, crea la suma adecuada
+            if self.hashtype == "md5":
+                suma = hashlib.md5()
+            elif self.hashtype == "sha1":
+                suma = hashlib.sha1()
+            elif self.hashtype == "sha224":
+                suma = hashlib.sha224()
+            elif self.hashtype == "sha256":
+                suma = hashlib.sha256()
+            elif self.hashtype == "sha384":
+                suma = hashlib.sha384()
+            elif self.hashtype == "sha512":
+                suma = hashlib.sha512()
+            elif self.hashtype == "crc32":
+                suma = 0
+            # calculamos el hash (crc32 es un caso especial)
+            if self.hashtype == "crc32":
+                while True:
+                    data = self.archivo.read(10240)
+                    if not data:
+                        break
+                    suma = zlib.crc32(data, suma)
+                self.archivo.close()
+                # arreglar con este if (http://bugs.python.org/issue1202)
+                if suma < 0:
+                    suma = suma & 0xffffffffL
+                resultado = "%08x" % (suma)
             # Calculamos el hash para los demas casos
             else:
                 while True:
