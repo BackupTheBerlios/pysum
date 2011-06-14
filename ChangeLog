@@ -1,3 +1,7 @@
+2011-06-13  Daniel Fuentes B. <dbfuentes@gmail.com>
+
+	* src/pysum.py: Threads are divided by function/tab
+
 2011-02-15  Daniel Fuentes B. <dbfuentes@gmail.com>
 
 	* src/pysum.py: Threads are divided by function (partially done)

@@ -89,26 +89,17 @@ gtk.glade.textdomain("pysum")
 class GetHash(threading.Thread):
     """Clase para calcular distintos hashs mediante threads"""
 
-    def __init__(self, filename, hashtype, text_mode, text_buffer,
-            hash_esperado=None, label=None):
+    def __init__(self, filename, hashtype, text_mode, text_buffer):
         super(GetHash, self).__init__()
         self.filename = filename
         self.hashtype = hashtype
         self.text_mode = text_mode  # modo texto o binario (para leer)
         self.text_buffer = text_buffer
-        # la etiqueta y hash_esperado se usan en la comparacion:
-        self.hash_esperado = hash_esperado
-        self.label = label
         self.quit = False
 
     def update_textbuffer(self, resultado):
         # Nota: resultado es una cadena de texto con el hash obtenido
         self.text_buffer.set_text(resultado)
-        return False
-
-    def update_label(self, mensaje):
-        # actualizar etiqueta (que se usa en la ventana de la comparacion)
-        self.label.set_text(mensaje)
         return False
 
     def run(self):
@@ -166,14 +157,6 @@ class GetHash(threading.Thread):
                 self.archivo.close()
                 resultado = str(suma.hexdigest())
                 gobject.idle_add(self.update_textbuffer, resultado)
-            # comparamos el hash hesperado con el obtenido (segunda tab)
-            if self.hash_esperado != None:
-                if resultado == self.hash_esperado:
-                    mensaje = _("%s checksums are the same") % (self.hashtype)
-                else:
-                    mensaje = (_("Checksums are diferent\nFile: ") +
-                        resultado + _("\nExpected: ") + self.hash_esperado)
-                gobject.idle_add(self.update_label, mensaje)
             self.quit = True  # Terminar la ejecucion del run()
 
 
@@ -182,7 +165,7 @@ class HashCompare(threading.Thread):
 
     def __init__(self, filename, hashtype, text_mode, hash_esperado=None,
             label=None):
-        super(GetHash, self).__init__()
+        super(HashCompare, self).__init__()
         self.filename = filename
         self.hashtype = hashtype
         self.text_mode = text_mode  # modo texto o binario (para leer)
@@ -241,7 +224,6 @@ class HashCompare(threading.Thread):
                     suma.update(data)
                 self.archivo.close()
                 resultado = str(suma.hexdigest())
-                gobject.idle_add(self.update_textbuffer, resultado)
             # comparamos el hash hesperado con el obtenido (segunda tab)
             if self.hash_esperado != None:
                 if resultado == self.hash_esperado:
@@ -404,10 +386,10 @@ verify md5 and other checksum"))
     def on_buttonok1_clicked(self, widget):  # Boton ok para calcular hash
         "This button generate the hash"
         # Se obtiene la ruta del archivo (entry1) y el tipo de hash (ComboBox)
-        texto_entry1 = self.entry1.get_text()
+        nombre_archivo = self.entry1.get_text()
         combobox_selec = valor_combobox(self.combobox1)
         # obtener el modo de lectura segun el radiobutton seleccionado
-        # RadioButton.get_active() returns True if the button is checked
+        # RadioButtonNN.get_active() retorna True si esta seleccionado
         if self.radiobutton1.get_active() == True:
             text_mode = True
         elif self.radiobutton2.get_active() == True:
@@ -417,12 +399,12 @@ verify md5 and other checksum"))
         # Se crea un buffer de texto (para el resultado del hash)
         text_buffer = gtk.TextBuffer()
         # Se intenta obtener el hash, dependiendo de la opcion escogida
-        if (len(texto_entry1) == 0):  # No se especifica archivo
-            mensaje = gtk.Label(_("Please choose a file"))
+        if (len(nombre_archivo) == 0):  # No se especifica archivo
+            label = gtk.Label(_("Please choose a file"))
             self.info(mensaje, _("Error"))
         else:
             # Comprobar si el archivo existe:
-            if os.path.exists(texto_entry1):
+            if os.path.exists(nombre_archivo):
                 if combobox_selec == "md5":
                     hashtype = "md5"
                 elif combobox_selec == "sha1":
@@ -438,14 +420,15 @@ verify md5 and other checksum"))
                 elif combobox_selec == "crc32":
                     hashtype = "crc32"
                 # Calcular el hash con estos datos
-                hilo = GetHash(texto_entry1, hashtype, text_mode, text_buffer)
+                hilo = GetHash(nombre_archivo, hashtype, text_mode,
+                    text_buffer)
                 hilo.start()
                 # Se muestra el buffer (hash obtenido) en textview
                 self.textview1.set_buffer(text_buffer)
                 hilo.quit = True
             else:
-                mensaje = gtk.Label((_("Can't open the file:") + texto_entry1))
-                self.info(mensaje, _("Error"))
+                label = gtk.Label((_("Can't open the file:") + nombre_archivo))
+                self.info(label, _("Error"))
 
     # ---------------------------------------------------------------
     # Pestaña que compara el hash de un archivo con un valor experado
@@ -458,29 +441,28 @@ verify md5 and other checksum"))
 
     def on_buttonok2_clicked(self, widget):
         # Obtenemos el texto del hash esperado (del entry3)
+        # Al hacer split se pierde el doble o mas espacios (que pueden
+        # haber antes o despues del texto) y luego joint une el texto
         hash_esperado = str(self.entry3.get_text())
-        # Al hacer split se pierde el doble, triple o mas espacios (que pueden
-        # haber antes o despues del texto) y luego joint unen los textos
         hash_esperado = hash_esperado.lower()
         hash_esperado = hash_esperado.split()
         hash_esperado = "".join(hash_esperado)
-        # Ahora obtenemos el nombre del archivo y tipo de hash
-        texto_entry2 = self.entry2.get_text()
+        # Obtenemos el nombre del archivo (entry2) y el tipo de hash
+        nombre_archivo = self.entry2.get_text()
         combobox_selec = valor_combobox(self.combobox2)
         # comprobar el modo de lectura a usar (text/binary)
         if self.radiobutton3.get_active() == True:
             text_mode = True
         else:  # en caso de estar el radiobutton4 seleccionado
             text_mode = False
-        # iniciamos un buffer de texto y una etiqueta
-        text_buffer = gtk.TextBuffer()
+        # iniciamos una etiqueta que mostrara el resultado (en el dialogo)
         label = gtk.Label()
         # Se intenta obtener el hash (primero comprobar el archivo)
-        if (len(texto_entry2) == 0):
+        if (len(nombre_archivo) == 0):
             label.set_text(_("Please choose a file"))
             self.info(label, _("Error"))
         else:
-            if os.path.exists(texto_entry2):
+            if os.path.exists(nombre_archivo):
                 if combobox_selec == "md5":
                     hashtype = "md5"
                 elif combobox_selec == "sha1":
@@ -496,14 +478,14 @@ verify md5 and other checksum"))
                 elif combobox_selec == "crc32":
                     hashtype = "crc32"
                 # Comprobamos si el resultado coincide con lo esperado
-                hilo = GetHash(texto_entry2, hashtype, text_mode, text_buffer,
+                hilo = HashCompare(nombre_archivo, hashtype, text_mode,
                     hash_esperado, label)
                 hilo.start()
                 # crear una ventana que entrege el resultado de la comparacion
                 self.info(label, _("Result"))
                 hilo.quit = True
             else:
-                label.set_text(_("Can't open the file:") + texto_entry2)
+                label.set_text(_("Can't open the file:") + nombre_archivo)
                 self.info(label, _("Error"))
 
 
